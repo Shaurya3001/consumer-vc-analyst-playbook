@@ -60,3 +60,16 @@
 - Validation / base-rates backtest: using 86-round dataset, compute real base rates per sector & stage
 - Extend Graduation Funnel or add "Base rates" panel showing observed vs modeled cohort numbers
 - See todo.md Session B for full spec
+
+## 2026-06-06 — Session B done (base-rates backtest) + Vercel build fix
+
+### Actions
+- BEFORE Session B: caught that Session A commit 1b8edef FAILED Vercel build (ESLint: unescaped apostrophe in page.tsx + unused REFERENCE_YEAR). tsc passed but next build runs ESLint. Fixed in 93f634e, deploy green, 6-signal momentum live. Lesson captured.
+- Session B: added stageProgression() to funding-analytics; built BaseRatesPanel.tsx on graduation funnel
+- DATA-MODEL CORRECTION mid-build: first panel design compared "observed seed->A vs modeled seed->A" — but the 89-round dataset is ~92% Series A+ with only 7 seed rounds and just 4 companies captured at 2+ stages (Honasa/Pilgrim/Foxtale/The Whole Truth). Observed seed->A came out 0/1 = meaningless. Scrapped the head-to-head; redesigned to show stage mix + bias-resistant timing (13mo median gap, step-up) and frame the *uncomputability* as the structural-selection-bias insight. Far more honest and impressive.
+- tsc + next build clean (stopped preview first); committed b7fcc28; Vercel green; live verified
+- Both reserved sessions (A + B) now DONE. The two "last ~1 point" rigor items from the shipped plan are complete.
+
+### Possible next work (no longer reserved)
+- White-space map could get the same observed-vs-modeled treatment
+- Momentum stage-velocity edge case: brand founded long ago + recent first raise reads as "slow" (flagged in Session A handoff)

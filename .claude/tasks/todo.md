@@ -43,7 +43,17 @@
 
 ---
 
-## RESERVED — Session B: Validation / base-rates backtest
+## DONE (2026-06-06) — Session B: Validation / base-rates backtest
+**Shipped & live** (commit b7fcc28). BaseRatesPanel on the graduation funnel computes, live from the 89 sourced rounds:
+- Stage mix (Seed 7 / Series A 27 / Series B 27 / Series C+ 25) — `stageBreakdown`
+- Median round gap 13mo (4 company pairs) + median step-up — `roundCadence`
+- `stageProgression()` added to funding-analytics for the coverage counts
+**Key finding (the real rigor):** ~92% of sourced rounds are Series A+ and only 7 are seed, so a seed→A graduation rate is *uncomputable* from press-sourced data (it would over-count survivors). The panel shows the modeled 27% seed→A beside this and flags the divergence as **structural selection bias, not an error** — and validates the bias-resistant timing base rate (13mo gap backs the "2023-24 cohorts still maturing" claim).
+- NOTE: first design tried "observed seed→A vs modeled" head-to-head; scrapped after the data showed 0/1 — a meaningless rate. Redesigned around what the data can honestly support. Lesson captured.
+- tsc + next build clean; deploy green; live verified.
+
+### Original spec (kept for reference)
+**Why:** Turns modeled claims (graduation funnel, white-space) into data-backed ones, and demonstrates the Momentum/funnel logic actually holds on history.
 **Why:** Turns modeled claims (graduation funnel, white-space) into data-backed ones, and demonstrates the Momentum/funnel logic actually holds on history.
 
 **Approach:**
