@@ -5,6 +5,7 @@ import { FUNDING_ROUNDS } from "@/lib/data/funding-rounds";
 import FundingFilters, { type FundingFiltersState } from "@/components/applets/funding-explorer/FundingFilters";
 import FundingTable from "@/components/applets/funding-explorer/FundingTable";
 import TheRead from "@/components/layout/TheRead";
+import { fundingRead, roundCadence } from "@/lib/utils/funding-analytics";
 
 const EMPTY_FILTERS: FundingFiltersState = {
   sectors: [],
@@ -37,6 +38,7 @@ export default function FundingExplorerPage() {
   }, [filters]);
 
   const totalUsd = filtered.reduce((s, r) => s + r.amount, 0);
+  const cadence = roundCadence(FUNDING_ROUNDS); // computed base rate across the full dataset
 
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100 max-w-7xl mx-auto">
@@ -52,12 +54,7 @@ export default function FundingExplorerPage() {
         </div>
       </div>
 
-      <TheRead>
-        Capital is concentrated, not spread. Beauty &amp; Personal Care and F&amp;B Packaged have absorbed the
-        most rounds and the most competitors - the crowded end of the market. Consumer Electronics,
-        Baby/Kids/Pets and the Value/Bharat tiers stay thinly funded, where a differentiated entrant
-        still finds room and pricing power.
-      </TheRead>
+      <TheRead>{fundingRead(filtered)}</TheRead>
 
       {/* Summary bar */}
       <div className="border-b border-zinc-800 px-6 py-3 flex gap-6 text-sm">
@@ -73,6 +70,15 @@ export default function FundingExplorerPage() {
           </span>{" "}
           companies
         </span>
+        <span className="text-zinc-600 hidden md:inline">|</span>
+        <span className="text-zinc-500 hidden md:inline" title="Computed from companies with 2+ rounds in the dataset">
+          <span className="text-zinc-300 font-medium">{cadence.medianMonths}mo</span> median between rounds
+        </span>
+        {cadence.medianStepUpX && (
+          <span className="text-zinc-500 hidden md:inline" title="Median round-size multiple between consecutive rounds">
+            <span className="text-zinc-300 font-medium">{cadence.medianStepUpX}x</span> median step-up
+          </span>
+        )}
       </div>
 
       {/* Body */}
