@@ -23,3 +23,40 @@
 - Phase 1: expand brands.ts to 50 brands + funding-rounds.ts to 50+ rounds
 - Then Phase 2: Funding Explorer (FundingFilters + FundingTable)
 - Then Phase 3: Momentum Dashboard (the hero applet)
+
+## 2026-06-06 — Session A (computed momentum signals)
+
+### Actions
+- Created lib/utils/brand-signals.ts: computeFundingRecencyScore (from lastRound.date, -2pts/mo decay) + computeInvestorQualityScore (INVESTORS AUM tier lookup)
+- Updated lib/utils/momentum-score.ts: new SignalDetail { value, type, derivation } type; MomentumResult.components now uses 4 SignalDetails; 2 computed, 2 estimated
+- Updated lib/data/taxonomy.ts: renamed qcDistributionScore->fundingRecencyScore, operatorQualityScore->investorQualityScore in SignalWeights
+- Updated SignalWeightSliders: green "computed" badge vs grey "est." badge per slider
+- Updated MomentumRow: expanded row shows cmp/est badge + derivation string under each signal bar
+- tsc clean, preview verified (Bombay Shaving Company: Recency 86 "2025-11 (7mo ago)" + Investor 85 "Sixth Sense Ventures · $500M AUM")
+- Committed feat(momentum-dashboard) + pushed to main; Vercel auto-deploying
+
+## 2026-06-06 — Brand expansion (research agent)
+
+### Actions
+- Research agent found 36 verified brands; 34 added after dropping Petsy (weak sourcing) and Classplus (B2B SaaS)
+- Coverage: Consumer FinTech (7), Consumer Internet (3), Consumer Services (3), F&B Foodservice +3, Home & Living +3, Consumer Electronics +2, F&B Packaged +5, Health & Wellness +4, Baby/Kids/Pets +2
+- Fixed: Wakefit moved to Home & Living (agent had Consumer Internet); Third Wave Coffee amount corrected to $38M (WestBridge ₹326 Cr round)
+- tsc clean; 60 brands showing in preview; committed and pushed
+- Total brands: 64 (was 30)
+
+## 2026-06-06 — Session A finished (2 remaining computed signals)
+
+### Actions
+- Added computeStageVelocityScore (stages/yr since founding vs roundCadence median base rate from FUNDING_ROUNDS) and computeCoInvestmentCentralityScore (lead investor realized-affinity centrality, reuses investor-affinity.ts rankCounterparts, normalised to max=100)
+- Extracted shared findInvestorByName helper; SignalWeights now 6 keys (defaults 20/15/20/20/15/10 = 100)
+- momentum-score.ts MomentumResult.components now 6 SignalDetails (4 computed, 2 estimated); sliders + MomentumRow bars + mini-bars all render 6
+- Page text updated to "4 signals computed ... 2 estimated"; sidebar note updated
+- Verified on a FRESH dev server (restarted to clear stale HMR buffer that was emitting false NaN warnings): console clean, all 73 rows valid scores, live re-sort works (max Stage Velocity surfaces Comet/Jar/CHK)
+- Comet derivation sample: Velocity 100 "Series A in 1y (founded 2023) = 3.0 stages/yr vs 0.9 base (3.3x)"; Co-invest 100 "Elevation Capital · 10 realized links"
+- Committed + pushed; todo.md Session A moved RESERVED -> DONE
+- LESSON: restart dev server (not just reload) after multi-file signal-shape changes - HMR buffer surfaced stale NaN console warnings even though render output was clean
+
+### Next session start (Session B)
+- Validation / base-rates backtest: using 86-round dataset, compute real base rates per sector & stage
+- Extend Graduation Funnel or add "Base rates" panel showing observed vs modeled cohort numbers
+- See todo.md Session B for full spec

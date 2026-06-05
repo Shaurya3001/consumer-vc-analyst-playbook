@@ -14,7 +14,17 @@
 
 ---
 
-## RESERVED — Session A: Make the Momentum Score honest/computed (highest-leverage)
+## DONE (2026-06-06) — Session A: Make the Momentum Score honest/computed
+**Shipped.** Momentum score now decomposes into 6 signals: **4 computed** + 2 explicitly tagged "estimated". All success criteria met (every signal traces to a computed value with visible derivation OR is tagged estimated; tsc clean; sliders re-sort live; screenshot proof; clean console).
+- `fundingRecencyScore` — months since last raise, -2pts/mo decay (`computeFundingRecencyScore`)
+- `investorQualityScore` — lead investor AUM tier + consumer-fund bonus (`computeInvestorQualityScore`)
+- `stageVelocityScore` — stages climbed/year vs dataset's median round cadence (`computeStageVelocityScore`, uses `roundCadence`)
+- `coInvestmentCentralityScore` — lead investor's realized-affinity centrality (`computeCoInvestmentCentralityScore`, reuses `investor-affinity.ts`)
+- Branded search + earned affinity remain estimated (no honest offline source) — tagged `est.` and visually separated.
+- Bootstrapped brands score neutral/0 on funding-derived signals by design (surfaces them as scouting targets, not proven bets).
+- Brand coverage expanded 30 → 73 (all 11 sectors, footwear, bootstrapped) during the same arc.
+
+### Original spec (kept for reference)
 **Why:** Momentum is the showpiece applet, but its 4 signals (branded search, QC distribution, earned affinity, operator quality) are hand-set *estimates*. A sharp investor discounts that. Replace estimated signals with ones genuinely derivable from data we already hold.
 
 **Approach:**
