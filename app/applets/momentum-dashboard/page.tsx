@@ -191,7 +191,7 @@ export default function MomentumDashboardPage() {
           <p className="text-xs text-zinc-700 leading-relaxed">
             Score = weighted blend of six signals. Four are computed from data - funding recency,
             investor quality, stage velocity (vs observed round cadence), and co-investment reach
-            (lead investor's syndicate centrality). Branded search and earned affinity are estimated
+            (lead investor syndicate centrality). Branded search and earned affinity are estimated
             from public sources. Bootstrapped brands score 0 on investor signals - intentional.
             Data as of May 2026.
           </p>

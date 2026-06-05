@@ -10,7 +10,6 @@ export interface ComputedSignal {
 }
 
 const REFERENCE_MONTH = "2026-06";
-const REFERENCE_YEAR = 2026;
 
 function monthsDiff(earlier: string, later: string): number {
   const [ey, em] = earlier.split("-").map(Number);
