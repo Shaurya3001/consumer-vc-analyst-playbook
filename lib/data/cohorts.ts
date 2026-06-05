@@ -96,6 +96,65 @@ export const SECTOR_COHORTS: SectorCohort[] = [
       { year: 2024, seedCount: 13, reachedSeriesA: 2, reachedSeriesB: 0, acquired: 0, shutdown: 2 },
     ],
   },
+  // ── Sectors added when brand coverage expanded to all 11 (June 2026) ─────────
+  // Modeled like the rest. FinTech/Internet graduate a touch higher than physical
+  // D2C (more institutional follow-on appetite in 2019-21), then cut harder by the
+  // post-2022 winter (RBI digital-lending tightening hit consumer fintech especially).
+  {
+    sector: "Consumer FinTech",
+    cohorts: [
+      { year: 2019, seedCount: 20, reachedSeriesA: 8, reachedSeriesB: 4, acquired: 2, shutdown: 4 },
+      { year: 2020, seedCount: 26, reachedSeriesA: 10, reachedSeriesB: 4, acquired: 1, shutdown: 5 },
+      { year: 2021, seedCount: 38, reachedSeriesA: 13, reachedSeriesB: 3, acquired: 1, shutdown: 9 },
+      { year: 2022, seedCount: 30, reachedSeriesA: 7, reachedSeriesB: 1, acquired: 0, shutdown: 8 },
+      { year: 2023, seedCount: 18, reachedSeriesA: 3, reachedSeriesB: 0, acquired: 0, shutdown: 5 },
+      { year: 2024, seedCount: 16, reachedSeriesA: 3, reachedSeriesB: 0, acquired: 0, shutdown: 3 },
+    ],
+  },
+  {
+    sector: "Consumer Internet",
+    cohorts: [
+      { year: 2019, seedCount: 24, reachedSeriesA: 9, reachedSeriesB: 4, acquired: 3, shutdown: 6 },
+      { year: 2020, seedCount: 28, reachedSeriesA: 11, reachedSeriesB: 4, acquired: 2, shutdown: 6 },
+      { year: 2021, seedCount: 40, reachedSeriesA: 14, reachedSeriesB: 3, acquired: 1, shutdown: 10 },
+      { year: 2022, seedCount: 30, reachedSeriesA: 7, reachedSeriesB: 1, acquired: 1, shutdown: 8 },
+      { year: 2023, seedCount: 20, reachedSeriesA: 3, reachedSeriesB: 0, acquired: 0, shutdown: 5 },
+      { year: 2024, seedCount: 18, reachedSeriesA: 3, reachedSeriesB: 0, acquired: 0, shutdown: 3 },
+    ],
+  },
+  {
+    sector: "Consumer Services",
+    cohorts: [
+      { year: 2019, seedCount: 12, reachedSeriesA: 4, reachedSeriesB: 2, acquired: 1, shutdown: 3 },
+      { year: 2020, seedCount: 14, reachedSeriesA: 5, reachedSeriesB: 2, acquired: 1, shutdown: 3 },
+      { year: 2021, seedCount: 20, reachedSeriesA: 6, reachedSeriesB: 1, acquired: 0, shutdown: 5 },
+      { year: 2022, seedCount: 16, reachedSeriesA: 4, reachedSeriesB: 1, acquired: 0, shutdown: 4 },
+      { year: 2023, seedCount: 12, reachedSeriesA: 2, reachedSeriesB: 0, acquired: 0, shutdown: 3 },
+      { year: 2024, seedCount: 13, reachedSeriesA: 2, reachedSeriesB: 0, acquired: 0, shutdown: 2 },
+    ],
+  },
+  {
+    sector: "F&B Foodservice",
+    cohorts: [
+      { year: 2019, seedCount: 13, reachedSeriesA: 4, reachedSeriesB: 2, acquired: 1, shutdown: 4 },
+      { year: 2020, seedCount: 11, reachedSeriesA: 3, reachedSeriesB: 1, acquired: 1, shutdown: 3 },
+      { year: 2021, seedCount: 22, reachedSeriesA: 6, reachedSeriesB: 1, acquired: 0, shutdown: 6 },
+      { year: 2022, seedCount: 17, reachedSeriesA: 4, reachedSeriesB: 1, acquired: 0, shutdown: 5 },
+      { year: 2023, seedCount: 13, reachedSeriesA: 2, reachedSeriesB: 0, acquired: 0, shutdown: 3 },
+      { year: 2024, seedCount: 14, reachedSeriesA: 2, reachedSeriesB: 0, acquired: 0, shutdown: 3 },
+    ],
+  },
+  {
+    sector: "Consumer Electronics",
+    cohorts: [
+      { year: 2019, seedCount: 7, reachedSeriesA: 3, reachedSeriesB: 1, acquired: 1, shutdown: 2 },
+      { year: 2020, seedCount: 8, reachedSeriesA: 3, reachedSeriesB: 2, acquired: 0, shutdown: 2 },
+      { year: 2021, seedCount: 12, reachedSeriesA: 4, reachedSeriesB: 1, acquired: 0, shutdown: 3 },
+      { year: 2022, seedCount: 10, reachedSeriesA: 2, reachedSeriesB: 1, acquired: 0, shutdown: 3 },
+      { year: 2023, seedCount: 8, reachedSeriesA: 1, reachedSeriesB: 0, acquired: 0, shutdown: 2 },
+      { year: 2024, seedCount: 9, reachedSeriesA: 1, reachedSeriesB: 0, acquired: 0, shutdown: 2 },
+    ],
+  },
 ];
 
 // ── Derived helpers ──────────────────────────────────────────────────────────

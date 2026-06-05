@@ -24,6 +24,11 @@ const SHORT: Record<string, string> = {
   "Fashion & Accessories": "Fashion",
   "Home & Living": "Home",
   "Baby, Kids & Pets": "Baby/Pets",
+  "Consumer FinTech": "FinTech",
+  "Consumer Internet": "Internet",
+  "Consumer Services": "Services",
+  "F&B Foodservice": "F&B Svc",
+  "Consumer Electronics": "Elec.",
 };
 
 interface TooltipPayloadItem {
