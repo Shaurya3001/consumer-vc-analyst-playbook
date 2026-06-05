@@ -10,7 +10,7 @@ const APPLETS = [
   {
     slug: "momentum-dashboard",
     title: "Momentum Dashboard",
-    description: "30 real emerging brands ranked by a transparent, re-weightable Momentum Score. Click any brand to see signal decomposition.",
+    description: "73 brands across all 11 consumer sectors - funded and bootstrapped. Re-weightable score with computed signals (funding recency, investor quality) and full derivation trace.",
     icon: "🚀",
   },
   {

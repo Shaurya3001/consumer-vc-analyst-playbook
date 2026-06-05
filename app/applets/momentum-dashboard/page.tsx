@@ -89,8 +89,8 @@ export default function MomentumDashboardPage() {
             </div>
             <h1 className="text-xl font-bold">Momentum Dashboard</h1>
             <p className="text-zinc-500 text-xs mt-0.5">
-              Discovery/sourcing tool - signals measure attention and distribution, not unit economics.
-              Re-weight the four signals below to reflect your thesis.
+              73 brands across all 11 consumer sectors - funded and bootstrapped scouting targets.
+              2 signals computed from data (funding recency, investor quality); 2 estimated. Re-weight to reflect your thesis.
             </p>
           </div>
           <div className="text-right shrink-0">
@@ -101,9 +101,11 @@ export default function MomentumDashboardPage() {
       </div>
 
       <TheRead>
-        Momentum is a sourcing signal, not a quality verdict. Read the mix, not just the score: a brand
-        high on paid-ad velocity but low on branded search is buying growth, not earning it. The durable
-        stories pair distribution reach with organic pull - weight those over a headline number.
+        Momentum is a sourcing signal, not a quality verdict. Read the mix: a brand high on paid-ad
+        velocity but low on branded search is buying growth, not earning it. The bootstrapped brands
+        score low on investor quality by design - that is the signal. Durable stories pair organic pull
+        with distribution reach; a maiden round at Rs 80 Cr bootstrapped revenue is a different risk
+        profile than a Series B at the same number.
       </TheRead>
 
       {/* Body: two-column on desktop */}
@@ -186,9 +188,10 @@ export default function MomentumDashboardPage() {
           </div>
 
           <p className="text-xs text-zinc-700 leading-relaxed">
-            Score = weighted blend of four signal categories, normalised within sector cohort.
-            High Meta ad velocity alone is a burn signal - not quality.
-            Data as of Dec 2025.
+            Score = weighted blend of four signals. Funding recency and investor quality are
+            computed from round data. Branded search and earned affinity are estimated from
+            public sources. Bootstrapped brands score 0 on investor quality - intentional.
+            Data as of May 2026.
           </p>
         </aside>
 
