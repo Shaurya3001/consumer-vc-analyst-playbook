@@ -1,7 +1,12 @@
 import type { Brand } from "@/lib/data/brands";
 import type { SignalWeights } from "@/lib/data/taxonomy";
 import { DEFAULT_SIGNAL_WEIGHTS } from "@/lib/data/taxonomy";
-import { computeFundingRecencyScore, computeInvestorQualityScore } from "./brand-signals";
+import {
+  computeFundingRecencyScore,
+  computeInvestorQualityScore,
+  computeStageVelocityScore,
+  computeCoInvestmentCentralityScore,
+} from "./brand-signals";
 
 export interface SignalDetail {
   value: number;        // 0-100
@@ -16,6 +21,8 @@ export interface MomentumResult {
     earnedAffinity: SignalDetail;
     fundingRecency: SignalDetail;
     investorQuality: SignalDetail;
+    stageVelocity: SignalDetail;
+    coInvestmentCentrality: SignalDetail;
   };
   confidence: "high" | "medium" | "low";
 }
@@ -26,6 +33,8 @@ export function computeMomentumScore(
 ): MomentumResult {
   const recency = computeFundingRecencyScore(brand.lastRound?.date);
   const investorQ = computeInvestorQualityScore(brand.lastRound?.leadInvestor);
+  const velocity = computeStageVelocityScore(brand.founded, brand.stage, brand.lastRound?.date);
+  const centrality = computeCoInvestmentCentralityScore(brand.lastRound?.leadInvestor);
 
   const components: MomentumResult["components"] = {
     brandedSearch: {
@@ -48,19 +57,33 @@ export function computeMomentumScore(
       type: "computed",
       derivation: investorQ.derivation,
     },
+    stageVelocity: {
+      value: velocity.score,
+      type: "computed",
+      derivation: velocity.derivation,
+    },
+    coInvestmentCentrality: {
+      value: centrality.score,
+      type: "computed",
+      derivation: centrality.derivation,
+    },
   };
 
   const totalWeight =
     weights.brandedSearchScore +
     weights.earnedAffinityScore +
     weights.fundingRecencyScore +
-    weights.investorQualityScore;
+    weights.investorQualityScore +
+    weights.stageVelocityScore +
+    weights.coInvestmentCentralityScore;
 
   const weighted =
     (components.brandedSearch.value * weights.brandedSearchScore +
       components.earnedAffinity.value * weights.earnedAffinityScore +
       components.fundingRecency.value * weights.fundingRecencyScore +
-      components.investorQuality.value * weights.investorQualityScore) /
+      components.investorQuality.value * weights.investorQualityScore +
+      components.stageVelocity.value * weights.stageVelocityScore +
+      components.coInvestmentCentrality.value * weights.coInvestmentCentralityScore) /
     totalWeight;
 
   // Confidence based on estimated signals having meaningful values (computed signals always present)

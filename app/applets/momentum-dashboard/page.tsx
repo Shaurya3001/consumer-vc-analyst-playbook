@@ -90,7 +90,8 @@ export default function MomentumDashboardPage() {
             <h1 className="text-xl font-bold">Momentum Dashboard</h1>
             <p className="text-zinc-500 text-xs mt-0.5">
               73 brands across all 11 consumer sectors - funded and bootstrapped scouting targets.
-              2 signals computed from data (funding recency, investor quality); 2 estimated. Re-weight to reflect your thesis.
+              4 signals computed from data (funding recency, investor quality, stage velocity, co-investment reach);
+              2 estimated. Re-weight to reflect your thesis.
             </p>
           </div>
           <div className="text-right shrink-0">
@@ -188,9 +189,10 @@ export default function MomentumDashboardPage() {
           </div>
 
           <p className="text-xs text-zinc-700 leading-relaxed">
-            Score = weighted blend of four signals. Funding recency and investor quality are
-            computed from round data. Branded search and earned affinity are estimated from
-            public sources. Bootstrapped brands score 0 on investor quality - intentional.
+            Score = weighted blend of six signals. Four are computed from data - funding recency,
+            investor quality, stage velocity (vs observed round cadence), and co-investment reach
+            (lead investor's syndicate centrality). Branded search and earned affinity are estimated
+            from public sources. Bootstrapped brands score 0 on investor signals - intentional.
             Data as of May 2026.
           </p>
         </aside>

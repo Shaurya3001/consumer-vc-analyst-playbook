@@ -42,6 +42,20 @@ const SIGNAL_META: {
     color: "bg-rose-500",
     computed: true,
   },
+  {
+    key: "stageVelocityScore",
+    label: "Stage Velocity",
+    description: "Stages climbed per year vs dataset cadence - computed",
+    color: "bg-cyan-500",
+    computed: true,
+  },
+  {
+    key: "coInvestmentCentralityScore",
+    label: "Co-investment Reach",
+    description: "Lead investor's syndicate centrality - computed from affinity graph",
+    color: "bg-fuchsia-500",
+    computed: true,
+  },
 ];
 
 const KEYS = SIGNAL_META.map((s) => s.key);
