@@ -1,51 +1,55 @@
-# India Consumer VC — Task Plan
+# The Consumer VC Analyst Playbook — Task Plan
 
-## Phase 0: Scaffold ✅
-- [x] Next.js 14 + TypeScript + Tailwind + shadcn/ui + Recharts + Framer Motion
-- [x] .claude/ directory with CLAUDE.md, rules, tasks
-- [x] lib/data/ — taxonomy.ts, brands.ts, funding-rounds.ts, investors.ts, cohorts.ts, unit-economics-defaults.ts
-- [x] lib/utils/momentum-score.ts — computeMomentumScore + computeLtvCac
-- [x] app/page.tsx — homepage with all 6 applet links
-- [x] app/applets/*/page.tsx — stub routes for all 6 applets
+## Status: SHIPPED & LIVE
+- **Live:** https://india-consumer-vc.vercel.app
+- **Repo:** https://github.com/Shaurya3001/consumer-vc-analyst-playbook (Vercel git-connected → push = auto-deploy)
+- All 8 applets built, deployed, verified. Daily 09:00 IST refresh cron + live countdown. Vercel Web Analytics enabled.
+- 86 cited funding rounds, 30 brands, 29 investors, reports parsed (Bain/Redseer/Fireside/McKinsey/BCG/PwC), "The read" investor takeaway on each applet, bounded max-w-7xl layout, plain hyphens (no em/en dashes).
+- Funding Explorer read is live-computed from data (`lib/utils/funding-analytics.ts`); round-cadence base rates shown.
 
-## Phase 1: Data completeness
-- [ ] Expand brands.ts to 50 brands (currently 5 seeds)
-- [ ] Expand funding-rounds.ts to 50+ rounds across all 11 sectors
-- [ ] Add whitespace data structure (funding density per sector × tier grid)
-- [ ] Add GTM-model breakdown to cohorts
+## Objective rating (self-assessed)
+- Portfolio/interview artifact: ~8/10.
+- Real VC-product bar: ~6.5–7/10 (raised from 5.5 via the data expansion + computed funding analytics).
+- The last ~1 point needs the two reserved projects below — both genuine rigor, not polish.
 
-Success criterion: `tsc --noEmit` passes; all 6 applet routes load without errors.
+---
 
-## Phase 2: Funding Explorer
-- [ ] FundingFilters component (sector, GTM, tier, stage, city, investor multi-select)
-- [ ] FundingTable component (sortable, paginated)
-- [ ] Mobile-responsive layout
+## RESERVED — Session A: Make the Momentum Score honest/computed (highest-leverage)
+**Why:** Momentum is the showpiece applet, but its 4 signals (branded search, QC distribution, earned affinity, operator quality) are hand-set *estimates*. A sharp investor discounts that. Replace estimated signals with ones genuinely derivable from data we already hold.
 
-Success criterion: All filter combinations render correct subsets; no console errors.
+**Approach:**
+- Recompute the score from *measurable* inputs instead of guessed 0-100s. Candidates derivable from `funding-rounds.ts` + `investors.ts`:
+  - **Funding recency / velocity** — months since last raise, rounds in last 24mo (from round dates).
+  - **Stage progression speed** — derived from `roundCadence` in `lib/utils/funding-analytics.ts`.
+  - **Investor quality** — lead/co-investor AUM + check-size tier from `investors.ts`.
+  - **Co-investment centrality** — how networked the cap table is (reuse `lib/utils/investor-affinity.ts`).
+- Keep the re-weightable sliders, but each signal now traces to a real number with a tooltip showing the computation.
+- For any signal that genuinely can't be measured offline (e.g. live Google Trends), either drop it or label it "estimated" explicitly and visually separate it — do NOT pass estimate off as measured.
+- Update `lib/data/brands.ts` only where a field is now derived; keep "data as of" honesty.
 
-## Phase 3: Momentum Dashboard (hero applet)
-- [ ] SignalWeightSliders (Framer Motion; 4 sliders, sum to 100%)
-- [ ] MomentumTable (sorted by computeMomentumScore; India 1/2/3 badge)
-- [ ] BrandCard hover state showing signal decomposition
-- [ ] "Data as of" label visible on page
+**Files:** `lib/utils/momentum-score.ts`, `components/applets/momentum-dashboard/*`, `app/applets/momentum-dashboard/page.tsx`, possibly a new `lib/utils/brand-signals.ts`.
 
-Success criterion: Re-weighting sliders re-sorts the table in real time; hover shows sub-scores.
+**Success criteria:** every signal in the decomposition either (a) traces to a computed value with a visible derivation, or (b) is explicitly tagged "estimated." `tsc` clean; sliders still re-sort live; screenshot proof.
 
-## Phase 4: White-space Map
-- [ ] WhitespaceHeatmap (Recharts; 11 sectors × 5 tiers; color = funding density)
-- [ ] Tooltip showing round count + gap narrative
+---
 
-Success criterion: Heatmap renders correctly with responsive container; no fixed pixel widths.
+## RESERVED — Session B: Validation / base-rates backtest
+**Why:** Turns modeled claims (graduation funnel, white-space) into data-backed ones, and demonstrates the Momentum/funnel logic actually holds on history.
 
-## Phase 5: Investor Map + Graduation Funnel
-- [ ] InvestorTable with sector + stage filters
-- [ ] CoInvestmentBadges showing frequent co-investors
-- [ ] GraduationFunnelChart (grouped bar by sector cohort year)
+**Approach:**
+- Using the 86-round dataset, compute real base rates per sector & stage: deal count & capital by year, median time-between-rounds, median round step-up, seed→A→B progression observed in the data (companies appearing at multiple stages).
+- Surface as a small computed analysis (extend Graduation Funnel, or a compact "Base rates" panel) that *backs* the modeled cohort numbers with observed ones — and flag where modeled vs observed diverge (honesty).
+- Optional stretch: a simple "does a recent raise + strong investor predict a follow-on within N months?" read on the historical rounds.
 
-## Phase 6: Unit Economics Sandbox
-- [ ] Category preset selector (loads defaults from unit-economics-defaults.ts)
-- [ ] 5 sliders (AOV, repeat rate, CAC, contribution margin, return rate)
-- [ ] Live LTV, LTV/CAC ratio, payback months output
-- [ ] "Category benchmark" disclaimer visible
+**Files:** `lib/utils/funding-analytics.ts` (extend), `app/applets/graduation-funnel/page.tsx` or a new panel, `lib/data/cohorts.ts` (annotate modeled vs observed).
 
-Success criterion: Adjusting any slider updates outputs in <100ms; no layout shift.
+**Success criteria:** at least one previously-modeled claim is now shown alongside a computed base rate from the real dataset, with divergence flagged. `tsc` clean; screenshot proof.
+
+---
+
+## Deploy/ops notes for any session
+- `npx tsc --noEmit` before commit; do NOT run `npx next build` while the preview dev server is live (corrupts `.next` → 500s). Build only after stopping the preview, or rely on Vercel's cloud build.
+- Push to `main` → Vercel auto-deploys; verify the live URL before claiming done.
+- Daily cron needs `ANTHROPIC_API_KEY` repo secret (user adds it). Without it the cron just bumps the timestamp — non-fatal.
+- All copy uses plain hyphens; no em/en dashes (a node script in history did the sweep — keep it that way).
+</content>
