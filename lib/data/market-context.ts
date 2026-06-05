@@ -102,6 +102,59 @@ export const BPC_MARKET: MarketStat[] = [
   },
 ];
 
+// Macro consumption outlook, sourced to the major industry reports (see lib/data/reports.ts).
+export const MACRO_CONSUMPTION: MarketStat[] = [
+  {
+    label: "India retail market by 2030",
+    value: "~$1T",
+    note: "Projected to reach ~$1 trillion by 2030 on rising disposable incomes and digitisation.",
+    source: "https://firesideventures.com/pages/the-indian-consumer-report",
+    asOf: "2025 (Fireside Ventures)",
+  },
+  {
+    label: "India VC funding (2025)",
+    value: "~$16B",
+    note: "Second consecutive year of growth; $250M+ rounds doubled YoY. Consumer tech cooled vs 2024 mega-deal peak.",
+    source: "https://www.bain.com/insights/india-venture-capital-report-2026/",
+    asOf: "2026 (Bain & Company)",
+  },
+  {
+    label: "Consumer tech funding (2024)",
+    value: "$5.4B",
+    note: "Largest VC sector in 2024, up 2.3x; D2C funding grew ~30% as quick commerce became the scaling channel.",
+    source: "https://www.bain.com/insights/india-venture-capital-report-2025/",
+    asOf: "2025 (Bain & Company)",
+  },
+  {
+    label: "Quick commerce GMV by 2030",
+    value: "$25B+",
+    note: "Scaling from ~$4B today; 30-33M monthly users across 150+ cities and 5,000+ dark stores. BPC on q-comm grew ~22.5x CY22-CY25.",
+    source: "https://redseer.com/reports/the-indian-consumer-at-2030-redefining-aspirations-choices-and-markets/",
+    asOf: "2025 (Redseer)",
+  },
+  {
+    label: "General trade share",
+    value: "91% → ~70%",
+    note: "GT share of retail falls from 91% (2014) to ~70% by 2030 as modern trade, e-com, quick commerce and D2C expand.",
+    source: "https://firesideventures.com/pages/the-indian-consumer-report",
+    asOf: "2025 (Fireside Ventures)",
+  },
+  {
+    label: "Middle class expansion",
+    value: "5% → 40%+",
+    note: "Share of population classified middle-class projected to rise sharply; real consumption ~4x (₹17T → ₹70T).",
+    source: "https://www.mckinsey.com/mgi/overview/in-the-news/consumer-evolution-in-india",
+    asOf: "2025 (McKinsey Global Institute)",
+  },
+  {
+    label: "Online shoppers by 2030",
+    value: "400M+",
+    note: "Against 1.1B internet users expected by 2030 — a deep runway for digital-first consumer brands.",
+    source: "https://firesideventures.com/pages/the-indian-consumer-report",
+    asOf: "2025 (Fireside Ventures)",
+  },
+];
+
 export const INDIA_CONSUMER_TIERS = {
   "India 1": {
     population: "~120M",

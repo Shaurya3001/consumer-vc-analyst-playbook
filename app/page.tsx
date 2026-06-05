@@ -46,6 +46,12 @@ const APPLETS = [
     description: "HUL, ITC, Marico, Emami - who bought what, for how much. M&A is the primary VC exit route in India consumer.",
     icon: "🤝",
   },
+  {
+    slug: "research",
+    title: "Research & Reports",
+    description: "The canonical India consumer reports - Bain, Redseer, Fireside, McKinsey, BCG, PwC - with headline figures and source links.",
+    icon: "📚",
+  },
 ];
 
 export default function Home() {
