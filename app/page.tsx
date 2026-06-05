@@ -4,7 +4,7 @@ const APPLETS = [
   {
     slug: "funding-explorer",
     title: "Funding Rounds Explorer",
-    description: "50 real rounds (2019-2026) - filter by sector, GTM model, income tier, stage, city, investor. Every row links to source.",
+    description: "85+ real rounds (2019-2026) - filter by sector, GTM model, income tier, stage, city, investor. Every row links to source.",
     icon: "💰",
   },
   {
