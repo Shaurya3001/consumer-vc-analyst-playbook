@@ -37,6 +37,7 @@ export const INCOME_TIERS = [
 export type IncomeTier = (typeof INCOME_TIERS)[number];
 
 export const STAGES = [
+  "Bootstrapped",
   "Pre-seed",
   "Seed",
   "Series A",

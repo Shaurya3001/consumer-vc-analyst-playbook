@@ -17,6 +17,7 @@ const INDIA_TIER_STYLES: Record<string, string> = {
 };
 
 const STAGE_STYLES: Record<string, string> = {
+  Bootstrapped: "text-amber-400",
   "Pre-seed": "text-zinc-400",
   Seed: "text-emerald-400",
   "Series A": "text-blue-400",
@@ -180,15 +181,23 @@ export default function MomentumRow({ brand, rank, result }: MomentumRowProps) {
 
               {/* Meta info */}
               <div className="flex flex-wrap gap-x-4 gap-y-1 pt-1 border-t border-zinc-800">
-                <span className="text-xs text-zinc-500">
-                  Last round:{" "}
-                  <span className="text-zinc-300">
-                    ${brand.lastRound.amount}M {brand.lastRound.stage} · {brand.lastRound.date.slice(0, 7)}
+                {brand.lastRound ? (
+                  <>
+                    <span className="text-xs text-zinc-500">
+                      Last round:{" "}
+                      <span className="text-zinc-300">
+                        ${brand.lastRound.amount}M {brand.lastRound.stage} · {brand.lastRound.date.slice(0, 7)}
+                      </span>
+                    </span>
+                    <span className="text-xs text-zinc-500">
+                      Lead: <span className="text-zinc-300">{brand.lastRound.leadInvestor}</span>
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-xs px-1.5 py-0.5 rounded border bg-amber-950 border-amber-800 text-amber-400 font-mono">
+                    Bootstrapped - no institutional round
                   </span>
-                </span>
-                <span className="text-xs text-zinc-500">
-                  Lead: <span className="text-zinc-300">{brand.lastRound.leadInvestor}</span>
-                </span>
+                )}
                 <span className="text-xs text-zinc-500">
                   GTM:{" "}
                   <span className="text-zinc-300">{brand.gtmModels.slice(0, 2).join(", ")}</span>

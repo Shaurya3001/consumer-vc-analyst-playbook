@@ -24,8 +24,8 @@ export function computeMomentumScore(
   brand: Brand,
   weights: SignalWeights = DEFAULT_SIGNAL_WEIGHTS,
 ): MomentumResult {
-  const recency = computeFundingRecencyScore(brand.lastRound.date);
-  const investorQ = computeInvestorQualityScore(brand.lastRound.leadInvestor);
+  const recency = computeFundingRecencyScore(brand.lastRound?.date);
+  const investorQ = computeInvestorQualityScore(brand.lastRound?.leadInvestor);
 
   const components: MomentumResult["components"] = {
     brandedSearch: {

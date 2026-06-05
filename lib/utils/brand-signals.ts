@@ -17,8 +17,12 @@ function monthsDiff(earlier: string, later: string): number {
  * Funding recency score — derived purely from lastRound.date.
  * Newer raise = higher score (recency proxy for momentum, not quality).
  * Decay: ~2pts/month; floor at 5.
+ * Returns 50 (neutral) for bootstrapped/unfunded brands.
  */
-export function computeFundingRecencyScore(lastRoundDate: string): ComputedSignal {
+export function computeFundingRecencyScore(lastRoundDate: string | undefined): ComputedSignal {
+  if (!lastRoundDate) {
+    return { score: 50, derivation: "No institutional round - bootstrapped / pre-seed (neutral score)" };
+  }
   const months = Math.max(0, monthsDiff(lastRoundDate, REFERENCE_MONTH));
   const score = Math.max(5, Math.round(100 - months * 2));
   const yr = lastRoundDate.slice(0, 4);
@@ -31,8 +35,12 @@ export function computeFundingRecencyScore(lastRoundDate: string): ComputedSigna
  * Investor quality score — derived from INVESTORS AUM + type.
  * Looks up the lead investor by name substring match.
  * Returns 30 (unknown) if not found in our dataset.
+ * Returns 0 for bootstrapped/unfunded brands.
  */
-export function computeInvestorQualityScore(leadInvestorName: string): ComputedSignal {
+export function computeInvestorQualityScore(leadInvestorName: string | undefined): ComputedSignal {
+  if (!leadInvestorName) {
+    return { score: 0, derivation: "No institutional investor on record - bootstrapped" };
+  }
   const lower = leadInvestorName.toLowerCase();
   const match = INVESTORS.find(
     (inv) =>
