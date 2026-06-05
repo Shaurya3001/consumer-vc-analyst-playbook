@@ -101,6 +101,68 @@ function median(xs: number[]): number {
   return s.length % 2 ? s[mid] : Math.round(((s[mid - 1] + s[mid]) / 2) * 10) / 10;
 }
 
+export interface StageProgressionStat {
+  companiesTracked: number;     // distinct companies in the (filtered) set
+  multiRoundCompanies: number;  // companies we captured at 2+ stages
+  companiesWithSeed: number;    // captured at Pre-seed or Seed
+  seedToA: number;              // of those, also captured at Series A+
+  seedToARate: number | null;   // 0-1, null if no seed companies
+  companiesWithA: number;       // captured at Series A
+  aToB: number;                 // of those, also captured at Series B+
+  aToBRate: number | null;      // 0-1
+}
+
+/**
+ * Observed stage progression in the real funding dataset.
+ *
+ * For each company, collect the set of stages we have rounds for, then count how
+ * many that appear at Seed also appear at Series A+, and so on. This is a DIRECT
+ * computation from sourced rounds - but the dataset is a curated set of *notable*
+ * rounds, so it is survivorship-biased upward: companies that stopped raising
+ * mostly drop out. The observed rate therefore reads HIGHER than the true base
+ * rate, which is exactly the divergence the UI flags against the modeled funnel.
+ */
+export function stageProgression(rounds: FundingRound[]): StageProgressionStat {
+  const stagesByCompany = new Map<string, Set<Stage>>();
+  for (const r of rounds) {
+    const set = stagesByCompany.get(r.company) ?? new Set<Stage>();
+    set.add(r.stage);
+    stagesByCompany.set(r.company, set);
+  }
+
+  let multiRound = 0;
+  let companiesWithSeed = 0;
+  let seedToA = 0;
+  let companiesWithA = 0;
+  let aToB = 0;
+
+  for (const stages of Array.from(stagesByCompany.values())) {
+    if (stages.size >= 2) multiRound += 1;
+    const hasSeed = stages.has("Pre-seed") || stages.has("Seed");
+    const hasA = stages.has("Series A");
+    const hasB = stages.has("Series B") || stages.has("Series C+");
+    if (hasSeed) {
+      companiesWithSeed += 1;
+      if (hasA || hasB) seedToA += 1;
+    }
+    if (hasA) {
+      companiesWithA += 1;
+      if (hasB) aToB += 1;
+    }
+  }
+
+  return {
+    companiesTracked: stagesByCompany.size,
+    multiRoundCompanies: multiRound,
+    companiesWithSeed,
+    seedToA,
+    seedToARate: companiesWithSeed > 0 ? seedToA / companiesWithSeed : null,
+    companiesWithA,
+    aToB,
+    aToBRate: companiesWithA > 0 ? aToB / companiesWithA : null,
+  };
+}
+
 export interface StageStat {
   stage: Stage;
   count: number;

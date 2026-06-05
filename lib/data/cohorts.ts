@@ -20,6 +20,15 @@ export interface SectorCohort {
 //  - Series A → Series B conversion is materially thinner post-2022 funding winter
 //  - 2022 cohorts are still maturing (lower realized graduation by mid-2026)
 // NOT a precise audited dataset - labelled as such throughout the UI.
+//
+// These MODELED rates are deliberately backtested against the real sourced rounds
+// (lib/utils/funding-analytics.ts + BaseRatesPanel). Key finding surfaced in the UI:
+// the sourced rounds are ~90% Series A or later (press covers winners at/after A,
+// not the seed population), so a seed->A graduation rate CANNOT be computed from
+// them - it would over-count survivors. The data instead validates bias-resistant
+// within-company timing (median round gap, median step-up). The modeled funnel fills
+// the population-rate gap and is validated against external base rates (Inc42/Bain
+// ~10-20%). The UI states this divergence explicitly rather than hiding it.
 export const SECTOR_COHORTS: SectorCohort[] = [
   {
     sector: "Beauty & Personal Care",

@@ -5,6 +5,7 @@ import { getFunnelTotals, COHORT_YEARS } from "@/lib/data/cohorts";
 import type { Sector } from "@/lib/data/taxonomy";
 import FunnelStages from "@/components/applets/graduation-funnel/FunnelStages";
 import SectorComparison from "@/components/applets/graduation-funnel/SectorComparison";
+import BaseRatesPanel from "@/components/applets/graduation-funnel/BaseRatesPanel";
 import TheRead from "@/components/layout/TheRead";
 
 export default function GraduationFunnelPage() {
@@ -113,6 +114,10 @@ export default function GraduationFunnelPage() {
               2024 seed company has barely had time to reach Series A by mid-2026 - and faced the
               post-2022 funding winter. Compare same-vintage cohorts across sectors for the cleanest signal.
             </p>
+          </div>
+
+          <div className="mt-6">
+            <BaseRatesPanel yearRange={yearRange} />
           </div>
         </section>
       </div>
