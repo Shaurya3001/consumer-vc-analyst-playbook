@@ -1,7 +1,19 @@
 "use client";
 import Link from "next/link";
 import { WHITESPACE_GRID } from "@/lib/data/whitespace";
+import { MACRO_CONSUMPTION } from "@/lib/data/market-context";
 import WhitespaceHeatmap from "@/components/applets/whitespace-map/WhitespaceHeatmap";
+
+// Report-sourced stats that explain WHY the gaps exist (structural backdrop).
+const BACKDROP_LABELS = [
+  "Branded retail by 2030",
+  "India I concentration",
+  "General trade share",
+  "Quick commerce GMV by 2030",
+];
+const BACKDROP = BACKDROP_LABELS
+  .map((l) => MACRO_CONSUMPTION.find((s) => s.label === l))
+  .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
 // Summary stats derived from grid
 const openCells = WHITESPACE_GRID.filter((c) => c.gapScore >= 75).length;
@@ -49,8 +61,35 @@ export default function WhitespaceMapPage() {
         <WhitespaceHeatmap cells={WHITESPACE_GRID} />
       </div>
 
+      {/* Market backdrop - report-sourced structural context for the gaps */}
+      <div className="px-6 pb-2">
+        <div className="border border-indigo-900 bg-indigo-950/20 rounded-xl p-4">
+          <p className="text-xs text-indigo-300 font-medium mb-1">Why the gaps exist (report-sourced)</p>
+          <p className="text-xs text-indigo-100/80 mb-3 max-w-3xl leading-relaxed">
+            Branded penetration is still low and metro-concentrated - the structural reason so many Value
+            and Bharat cells read as white space. As branding deepens and channels shift, today&apos;s gaps are
+            tomorrow&apos;s categories.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {BACKDROP.map((s) => (
+              <a
+                key={s.label}
+                href={s.source}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-zinc-900/60 border border-zinc-800 rounded-lg p-3 hover:border-zinc-600 transition-colors"
+              >
+                <p className="text-base font-bold text-zinc-100 tabular-nums">{s.value}</p>
+                <p className="text-[11px] text-zinc-400 mt-0.5">{s.label}</p>
+                <p className="text-[10px] text-indigo-400 mt-1">{s.asOf}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Notable gaps callout */}
-      <div className="px-6 pb-8">
+      <div className="px-6 pb-8 pt-6">
         <h2 className="text-sm font-semibold text-zinc-300 mb-3">Highest-gap cells worth investigating</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {WHITESPACE_GRID

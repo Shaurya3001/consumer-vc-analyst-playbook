@@ -33,7 +33,7 @@ const EDITORIAL_GAP: Partial<Record<`${Sector}::${IncomeTier}`, { score: number;
   "F&B Foodservice::Mass-premium": { score: 40, narrative: "Licious, Hocco active; room for regional variants" },
 
   // Beauty & Personal Care
-  "Beauty & Personal Care::Mass-premium": { score: 10, narrative: "Most crowded cell - Pilgrim, mCaffeine, SUGAR, Purplle, Innovist all compete" },
+  "Beauty & Personal Care::Mass-premium": { score: 10, narrative: "Most crowded cell - Pilgrim, mCaffeine, SUGAR, Purplle, Innovist all compete. BPC GMV on quick commerce grew ~22.5x CY22-CY25 (Redseer), which pulled everyone in." },
   "Beauty & Personal Care::Premium":      { score: 25, narrative: "Juicy Chemistry, Earth Rhythm funded; still fewer players than mass-premium" },
   "Beauty & Personal Care::Mass":         { score: 60, narrative: "Affordable BPC at ₹50-200 price points - dominated by Hindustan Unilever; D2C gap" },
   "Beauty & Personal Care::Value":        { score: 88, narrative: "Sachets and local brands - almost no VC play; GT distribution required" },
