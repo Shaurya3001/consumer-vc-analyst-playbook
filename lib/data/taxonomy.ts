@@ -58,14 +58,14 @@ export type IndiaTier = keyof typeof INDIA_TIERS;
 // Momentum signal weights (default - user can re-weight via sliders)
 export const DEFAULT_SIGNAL_WEIGHTS = {
   brandedSearchScore: 35,
-  qcDistributionScore: 25,
   earnedAffinityScore: 20,
-  operatorQualityScore: 20,
+  fundingRecencyScore: 25,
+  investorQualityScore: 20,
 } as const;
 
 export type SignalWeights = {
   brandedSearchScore: number;
-  qcDistributionScore: number;
   earnedAffinityScore: number;
-  operatorQualityScore: number;
+  fundingRecencyScore: number;
+  investorQualityScore: number;
 };

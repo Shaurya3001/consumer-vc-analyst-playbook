@@ -25,10 +25,10 @@ const STAGE_STYLES: Record<string, string> = {
 };
 
 const SIGNAL_BARS = [
-  { key: "brandedSearch" as const, label: "Search", color: "bg-indigo-500" },
-  { key: "qcDistribution" as const, label: "QC Dist.", color: "bg-emerald-500" },
-  { key: "earnedAffinity" as const, label: "Affinity", color: "bg-amber-500" },
-  { key: "operatorQuality" as const, label: "Operator", color: "bg-rose-500" },
+  { key: "brandedSearch" as const, label: "Search", color: "bg-indigo-500", computed: false },
+  { key: "earnedAffinity" as const, label: "Affinity", color: "bg-amber-500", computed: false },
+  { key: "fundingRecency" as const, label: "Recency", color: "bg-emerald-500", computed: true },
+  { key: "investorQuality" as const, label: "Investor", color: "bg-rose-500", computed: true },
 ];
 
 const SCORE_BG = (score: number) => {
@@ -102,7 +102,7 @@ export default function MomentumRow({ brand, rank, result }: MomentumRowProps) {
         {/* Mini signal bars */}
         <div className="hidden sm:flex items-end gap-0.5 h-6 shrink-0" aria-hidden="true">
           {SIGNAL_BARS.map(({ key, color }) => {
-            const val = result.components[key];
+            const val = result.components[key].value;
             return (
               <div
                 key={key}
@@ -138,24 +138,41 @@ export default function MomentumRow({ brand, rank, result }: MomentumRowProps) {
           >
             <div className="px-4 pb-4 pt-1 ml-9 space-y-3">
               {/* Signal bars */}
-              <div className="space-y-2">
-                {SIGNAL_BARS.map(({ key, label, color }) => {
-                  const val = result.components[key];
+              <div className="space-y-3">
+                {SIGNAL_BARS.map(({ key, label, color, computed }) => {
+                  const detail = result.components[key];
                   return (
-                    <div key={key} className="flex items-center gap-3">
-                      <span className="text-xs text-zinc-500 w-20 shrink-0">{label}</span>
-                      <div className="flex-1 h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <motion.div
-                          className={`h-full rounded-full ${color}`}
-                          initial={{ width: 0 }}
-                          animate={{ width: `${val}%` }}
-                          transition={{ duration: 0.3, ease: "easeOut" }}
-                          aria-hidden="true"
-                        />
+                    <div key={key} className="space-y-1">
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1.5 w-20 shrink-0">
+                          <span className="text-xs text-zinc-500">{label}</span>
+                          <span
+                            className={`text-[9px] px-1 py-0.5 rounded border font-mono leading-none ${
+                              computed
+                                ? "bg-emerald-950 border-emerald-800 text-emerald-400"
+                                : "bg-zinc-800 border-zinc-700 text-zinc-600"
+                            }`}
+                            aria-label={computed ? "computed from data" : "estimated"}
+                          >
+                            {computed ? "cmp" : "est"}
+                          </span>
+                        </div>
+                        <div className="flex-1 h-2 bg-zinc-800 rounded-full overflow-hidden">
+                          <motion.div
+                            className={`h-full rounded-full ${color}`}
+                            initial={{ width: 0 }}
+                            animate={{ width: `${detail.value}%` }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            aria-hidden="true"
+                          />
+                        </div>
+                        <span className="text-xs font-mono tabular-nums text-zinc-400 w-8 text-right">
+                          {detail.value}
+                        </span>
                       </div>
-                      <span className="text-xs font-mono tabular-nums text-zinc-400 w-8 text-right">
-                        {val}
-                      </span>
+                      <p className="text-[10px] text-zinc-600 ml-[5.5rem] leading-tight">
+                        {detail.derivation}
+                      </p>
                     </div>
                   );
                 })}
@@ -181,8 +198,7 @@ export default function MomentumRow({ brand, rank, result }: MomentumRowProps) {
               {/* Disclaimer */}
               <p className="text-xs text-zinc-600">
                 Signals compiled from public sources · as of {brand.dataAsOf} ·{" "}
-                {result.confidence === "high" ? "4/4" : result.confidence === "medium" ? "2-3/4" : "1/4"} signals
-                populated ·{" "}
+                {result.confidence === "high" ? "2/2" : result.confidence === "medium" ? "1/2" : "0/2"} estimated signals populated ·{" "}
                 <a
                   href={brand.sources[0]}
                   target="_blank"

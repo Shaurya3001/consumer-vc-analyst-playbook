@@ -12,30 +12,35 @@ const SIGNAL_META: {
   label: string;
   description: string;
   color: string;
+  computed: boolean;
 }[] = [
   {
     key: "brandedSearchScore",
     label: "Branded Search",
-    description: "Google Trends slope - organic pull",
+    description: "Google Trends slope - organic pull (estimated)",
     color: "bg-indigo-500",
-  },
-  {
-    key: "qcDistributionScore",
-    label: "QC Distribution",
-    description: "Blinkit / Zepto / Instamart coverage",
-    color: "bg-emerald-500",
+    computed: false,
   },
   {
     key: "earnedAffinityScore",
     label: "Earned Affinity",
-    description: "Organic UGC from sub-10k accounts",
+    description: "Organic UGC from sub-10k accounts (estimated)",
     color: "bg-amber-500",
+    computed: false,
   },
   {
-    key: "operatorQualityScore",
-    label: "Operator Quality",
-    description: "Founder pedigree + ops hiring velocity",
+    key: "fundingRecencyScore",
+    label: "Funding Recency",
+    description: "Months since last raise - computed from round date",
+    color: "bg-emerald-500",
+    computed: true,
+  },
+  {
+    key: "investorQualityScore",
+    label: "Investor Quality",
+    description: "Lead investor AUM tier - computed from investor data",
     color: "bg-rose-500",
+    computed: true,
   },
 ];
 
@@ -106,16 +111,28 @@ export default function SignalWeightSliders({ weights, onChange }: SignalWeightS
         </span>
       </div>
 
-      {SIGNAL_META.map(({ key, label, description, color }) => (
+      {SIGNAL_META.map(({ key, label, description, color, computed }) => (
         <div key={key} className="space-y-1.5">
           <div className="flex items-center justify-between">
             <div>
-              <label
-                htmlFor={`slider-${key}`}
-                className="text-sm font-medium text-zinc-200 cursor-pointer"
-              >
-                {label}
-              </label>
+              <div className="flex items-center gap-1.5">
+                <label
+                  htmlFor={`slider-${key}`}
+                  className="text-sm font-medium text-zinc-200 cursor-pointer"
+                >
+                  {label}
+                </label>
+                <span
+                  className={`text-[10px] px-1.5 py-0.5 rounded border font-mono ${
+                    computed
+                      ? "bg-emerald-950 border-emerald-800 text-emerald-400"
+                      : "bg-zinc-800 border-zinc-700 text-zinc-500"
+                  }`}
+                  aria-label={computed ? "computed from data" : "estimated"}
+                >
+                  {computed ? "computed" : "est."}
+                </span>
+              </div>
               <p className="text-xs text-zinc-500 mt-0.5">{description}</p>
             </div>
             <span className="text-sm font-mono tabular-nums text-zinc-300 ml-4 w-8 text-right">
