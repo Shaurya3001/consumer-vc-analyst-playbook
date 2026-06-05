@@ -70,6 +70,14 @@
 - tsc + next build clean (stopped preview first); committed b7fcc28; Vercel green; live verified
 - Both reserved sessions (A + B) now DONE. The two "last ~1 point" rigor items from the shipped plan are complete.
 
+## 2026-06-06 — Funnel cohort cross-check (sector coverage)
+
+### Actions
+- Cross-checked graduation funnel after brand expansion: SECTOR_COHORTS modeled only 6 sectors, but brands now span 11. Added modeled cohort rows for the 5 missing sectors (Consumer FinTech, Consumer Internet, Consumer Services, F&B Foodservice, Consumer Electronics) + short axis labels in SectorComparison.
+- DELIBERATELY did NOT derive cohorts from the brand list (winner-biased) - kept modeled/indicative per the Session B survivorship finding. FinTech/Internet modeled to graduate slightly higher in 2019-21, cut harder post-2022 (RBI digital-lending tightening) - matches India funding history.
+- Verified: funnel total 612 -> 1151 seed rounds; aggregate seed->A holds at 27% (315/1151), confirming methodology consistency; 11 bars render with correct live tooltips; tsc + next build clean; deploy green; live HTML confirmed (contains 1151, not 612). Commit b2353f9.
+
 ### Possible next work (no longer reserved)
-- White-space map could get the same observed-vs-modeled treatment
+- White-space map could get the same observed-vs-modeled treatment + the 5 new sectors
 - Momentum stage-velocity edge case: brand founded long ago + recent first raise reads as "slow" (flagged in Session A handoff)
+- cohorts.ts COHORT_YEARS still 2019-2024; could add 2025 vintage (near-zero graduation by mid-2026, low value)
