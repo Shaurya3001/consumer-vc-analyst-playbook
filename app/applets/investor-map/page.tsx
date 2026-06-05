@@ -7,6 +7,7 @@ import type { Stage, Sector } from "@/lib/data/taxonomy";
 import InvestorCard from "@/components/applets/investor-map/InvestorCard";
 import SyndicateShortlist from "@/components/applets/investor-map/SyndicateShortlist";
 import AffinityMatrix from "@/components/applets/investor-map/AffinityMatrix";
+import TheRead from "@/components/layout/TheRead";
 
 export default function InvestorMapPage() {
   const [anchorId, setAnchorId] = useState<string>(INVESTORS[0].id);
@@ -38,6 +39,12 @@ export default function InvestorMapPage() {
           Same data, different signs.
         </p>
       </div>
+
+      <TheRead>
+        Build a syndicate on realised co-investment, not similarity. The funds most like you on stage and
+        sector are often your competitors for the deal, not your partners in it - the real allies are the
+        ones who have actually written cheques alongside you. Use the bands to separate the two.
+      </TheRead>
 
       {/* Anchor status bar */}
       <div className="border-b border-zinc-800 px-6 py-3 flex items-center gap-3 flex-wrap bg-indigo-950/20">

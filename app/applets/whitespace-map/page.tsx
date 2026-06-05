@@ -3,6 +3,7 @@ import Link from "next/link";
 import { WHITESPACE_GRID } from "@/lib/data/whitespace";
 import { MACRO_CONSUMPTION } from "@/lib/data/market-context";
 import WhitespaceHeatmap from "@/components/applets/whitespace-map/WhitespaceHeatmap";
+import TheRead from "@/components/layout/TheRead";
 
 // Report-sourced stats that explain WHY the gaps exist (structural backdrop).
 const BACKDROP_LABELS = [
@@ -55,6 +56,12 @@ export default function WhitespaceMapPage() {
           </div>
         </div>
       </div>
+
+      <TheRead>
+        Gaps cluster where branding is shallow and distribution is hard - the Value and Bharat tiers -
+        not in the metro-premium cells everyone already contests. The opportunity is rarely a thinner
+        slice of a crowded category; it is the category that has not been branded yet.
+      </TheRead>
 
       {/* Heatmap */}
       <div className="p-6">

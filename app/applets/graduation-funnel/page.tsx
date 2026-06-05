@@ -5,6 +5,7 @@ import { getFunnelTotals, COHORT_YEARS } from "@/lib/data/cohorts";
 import type { Sector } from "@/lib/data/taxonomy";
 import FunnelStages from "@/components/applets/graduation-funnel/FunnelStages";
 import SectorComparison from "@/components/applets/graduation-funnel/SectorComparison";
+import TheRead from "@/components/layout/TheRead";
 
 export default function GraduationFunnelPage() {
   const [activeSector, setActiveSector] = useState<string | null>(null);
@@ -26,6 +27,13 @@ export default function GraduationFunnelPage() {
           Series B+? Base rates a VC rarely has cleanly - useful for calibrating &quot;is this a normal outcome?&quot;
         </p>
       </div>
+
+      <TheRead>
+        Roughly one in three seed-funded consumer brands reaches Series A, and far fewer reach Series B+.
+        A brand that has already raised a Series A has cleared most of that cull - its risk is priced
+        differently from the seed pool. Thinner 2022-24 cohorts also mean fewer survivors competing for
+        the next round of growth capital.
+      </TheRead>
 
       {/* Controls */}
       <div className="border-b border-zinc-800 max-w-7xl mx-auto px-6 py-3 flex items-center gap-4 flex-wrap">

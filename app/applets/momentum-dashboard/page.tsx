@@ -6,6 +6,7 @@ import { SECTORS, STAGES, DEFAULT_SIGNAL_WEIGHTS } from "@/lib/data/taxonomy";
 import type { SignalWeights } from "@/lib/data/taxonomy";
 import SignalWeightSliders from "@/components/applets/momentum-dashboard/SignalWeightSliders";
 import MomentumTable from "@/components/applets/momentum-dashboard/MomentumTable";
+import TheRead from "@/components/layout/TheRead";
 
 const INDIA_TIERS = ["India 1", "India 2", "India 3"] as const;
 
@@ -98,6 +99,12 @@ export default function MomentumDashboardPage() {
           </div>
         </div>
       </div>
+
+      <TheRead>
+        Momentum is a sourcing signal, not a quality verdict. Read the mix, not just the score: a brand
+        high on paid-ad velocity but low on branded search is buying growth, not earning it. The durable
+        stories pair distribution reach with organic pull - weight those over a headline number.
+      </TheRead>
 
       {/* Body: two-column on desktop */}
       <div className="flex flex-col lg:flex-row min-h-[calc(100vh-80px)]">

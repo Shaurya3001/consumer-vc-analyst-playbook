@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { UNIT_ECONOMICS_DEFAULTS } from "@/lib/data/unit-economics-defaults";
 import { computeUnitEconomics, VERDICT_META, type UnitEconInputs } from "@/lib/utils/unit-economics";
 import EconSlider from "@/components/applets/unit-economics/EconSlider";
+import TheRead from "@/components/layout/TheRead";
 
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 const pct = (n: number) => `${Math.round(n * 100)}%`;
@@ -51,6 +52,13 @@ export default function UnitEconomicsPage() {
           input to model the scenario. LTV/CAC and payback update live - every intermediate is shown.
         </p>
       </div>
+
+      <TheRead>
+        In Indian consumer, deals die on unit economics, not TAM. The bar is a 3x LTV/CAC with sub-12-month
+        payback; anything thinner means growth is just buying revenue, and quick-commerce fees (often
+        35-50% of price) quietly erode the margin that funds it. Pressure-test the founder&apos;s numbers
+        here before the narrative seduces you.
+      </TheRead>
 
       {/* Preset selector */}
       <div className="border-b border-zinc-800 max-w-7xl mx-auto px-6 py-3 flex items-center gap-3 flex-wrap">

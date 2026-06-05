@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FUNDING_ROUNDS } from "@/lib/data/funding-rounds";
 import FundingFilters, { type FundingFiltersState } from "@/components/applets/funding-explorer/FundingFilters";
 import FundingTable from "@/components/applets/funding-explorer/FundingTable";
+import TheRead from "@/components/layout/TheRead";
 
 const EMPTY_FILTERS: FundingFiltersState = {
   sectors: [],
@@ -50,6 +51,13 @@ export default function FundingExplorerPage() {
           </p>
         </div>
       </div>
+
+      <TheRead>
+        Capital is concentrated, not spread. Beauty &amp; Personal Care and F&amp;B Packaged have absorbed the
+        most rounds and the most competitors - the crowded end of the market. Consumer Electronics,
+        Baby/Kids/Pets and the Value/Bharat tiers stay thinly funded, where a differentiated entrant
+        still finds room and pricing power.
+      </TheRead>
 
       {/* Summary bar */}
       <div className="border-b border-zinc-800 px-6 py-3 flex gap-6 text-sm">
