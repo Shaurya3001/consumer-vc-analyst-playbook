@@ -9,6 +9,8 @@ import TheRead from "@/components/layout/TheRead";
 
 const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 const pct = (n: number) => `${Math.round(n * 100)}%`;
+// Below 1x, show 2 decimals so an unprofitable ratio reads true (0.97x, not 1x); else 1 decimal.
+const ratioFmt = (r: number) => (r < 1 ? r.toFixed(2) : (Math.round(r * 10) / 10).toString());
 
 function presetToInputs(p: (typeof UNIT_ECONOMICS_DEFAULTS)[number]): UnitEconInputs {
   return {
@@ -118,7 +120,7 @@ export default function UnitEconomicsPage() {
             <div className="flex items-center justify-between">
               <span className={`text-lg font-bold ${verdict.color}`}>{verdict.label}</span>
               <span className={`text-2xl font-bold tabular-nums ${verdict.color}`}>
-                {result.ltvCacRatio}× <span className="text-sm text-zinc-500 font-normal">LTV:CAC</span>
+                {ratioFmt(result.ltvCacRatio)}× <span className="text-sm text-zinc-500 font-normal">LTV:CAC</span>
               </span>
             </div>
             <p className="text-xs text-zinc-400 mt-1">{verdict.note}</p>
@@ -144,7 +146,7 @@ export default function UnitEconomicsPage() {
               <ChainRow label={`× ${inputs.ordersPerYear} orders/yr`} value={`= ${inr(result.annualContrib)} / yr`} muted />
               <ChainRow label={`× ${result.lifespanYears}y lifespan`} value={`= ${inr(result.ltv)} LTV`} highlight />
               <div className="h-px bg-zinc-800 my-1" />
-              <ChainRow label={`÷ CAC (${inr(inputs.cac)})`} value={`= ${result.ltvCacRatio}× LTV:CAC`} highlight />
+              <ChainRow label={`÷ CAC (${inr(inputs.cac)})`} value={`= ${ratioFmt(result.ltvCacRatio)}× LTV:CAC`} highlight />
             </div>
           </div>
 

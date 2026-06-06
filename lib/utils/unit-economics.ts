@@ -67,7 +67,7 @@ export function computeUnitEconomics(inp: UnitEconInputs): UnitEconResult {
     annualContrib: Math.round(annualContrib),
     lifespanYears: Math.round(lifespanYears * 10) / 10,
     ltv: Math.round(ltv),
-    ltvCacRatio: Math.round(ltvCacRatio * 10) / 10,
+    ltvCacRatio: Math.round(ltvCacRatio * 100) / 100, // 2dp kept so sub-1x reads true (0.97x, not 1x)
     paybackMonths,
     firstOrderMargin: Math.round(firstOrderMargin),
     verdict,
