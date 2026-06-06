@@ -1,31 +1,33 @@
-import { INVESTORS, type Investor } from "@/lib/data/investors";
+import { INVESTORS } from "@/lib/data/investors";
 import type { Stage } from "@/lib/data/taxonomy";
 import { FUNDING_ROUNDS } from "@/lib/data/funding-rounds";
 import { roundCadence } from "@/lib/utils/funding-analytics";
 import { rankCounterparts } from "@/lib/utils/investor-affinity";
+import type { Investor } from "@/lib/data/investors";
+import {
+  REFERENCE_MONTH,
+  RECENCY_DECAY_PER_MONTH,
+  RECENCY_BOOTSTRAPPED_NEUTRAL,
+  STAGE_VELOCITY_NEUTRAL,
+  SEED_FUND_THESIS_BONUS,
+  INVESTOR_UNKNOWN_DEFAULT,
+  CENTRALITY_UNKNOWN_DEFAULT,
+  STAGE_LADDER,
+  AUM_QUALITY_TIERS,
+  NULL_AUM_BASE_BY_TYPE,
+  expectedStagesPerYear,
+} from "@/lib/data/scoring-spec";
 
 export interface ComputedSignal {
   score: number;   // 0-100
   derivation: string;
 }
 
-const REFERENCE_MONTH = "2026-06";
-
 function monthsDiff(earlier: string, later: string): number {
   const [ey, em] = earlier.split("-").map(Number);
   const [ly, lm] = later.split("-").map(Number);
   return (ly - ey) * 12 + (lm - em);
 }
-
-/** Stage ladder index - founding is stage 0, each round climbs one rung. */
-const STAGE_LADDER: Record<Stage, number> = {
-  Bootstrapped: 0,
-  "Pre-seed": 1,
-  Seed: 2,
-  "Series A": 3,
-  "Series B": 4,
-  "Series C+": 5,
-};
 
 /**
  * Normalise an investor name for matching: lowercase, drop parentheticals like
@@ -68,13 +70,16 @@ function findInvestorByName(name: string): Investor | undefined {
  */
 export function computeFundingRecencyScore(lastRoundDate: string | undefined): ComputedSignal {
   if (!lastRoundDate) {
-    return { score: 50, derivation: "No institutional round - bootstrapped / pre-seed (neutral score)" };
+    return {
+      score: RECENCY_BOOTSTRAPPED_NEUTRAL,
+      derivation: "No institutional round - bootstrapped / pre-seed (neutral score)",
+    };
   }
   const months = Math.max(0, monthsDiff(lastRoundDate, REFERENCE_MONTH));
-  const score = Math.max(5, Math.round(100 - months * 2));
+  const score = Math.max(5, Math.round(100 - months * RECENCY_DECAY_PER_MONTH));
   const yr = lastRoundDate.slice(0, 4);
   const mo = lastRoundDate.slice(5, 7);
-  const label = `${yr}-${mo} (${months}mo ago) · -2pts/mo decay`;
+  const label = `${yr}-${mo} (${months}mo ago) · -${RECENCY_DECAY_PER_MONTH}pts/mo decay`;
   return { score, derivation: label };
 }
 
@@ -92,8 +97,8 @@ export function computeInvestorQualityScore(leadInvestorName: string | undefined
 
   if (!match) {
     return {
-      score: 30,
-      derivation: `${leadInvestorName} · not in investor dataset (default 30)`,
+      score: INVESTOR_UNKNOWN_DEFAULT,
+      derivation: `${leadInvestorName} · not in investor dataset (default ${INVESTOR_UNKNOWN_DEFAULT})`,
     };
   }
 
@@ -101,13 +106,8 @@ export function computeInvestorQualityScore(leadInvestorName: string | undefined
   let base: number;
   let basis: string;
   if (aum !== null) {
-    // Disclosed AUM drives the tier directly.
-    if (aum >= 1000) base = 95;
-    else if (aum >= 500) base = 85;
-    else if (aum >= 200) base = 75;
-    else if (aum >= 100) base = 65;
-    else if (aum >= 50) base = 55;
-    else base = 45;
+    // Disclosed AUM drives the tier directly (first tier whose min is met).
+    base = AUM_QUALITY_TIERS.find((t) => aum >= t.min)?.score ?? 45;
     basis = formatAum(aum);
   } else {
     // No disclosed AUM (sovereigns, strategics, angel networks) - estimate from
@@ -116,8 +116,8 @@ export function computeInvestorQualityScore(leadInvestorName: string | undefined
     basis = "AUM undisclosed";
   }
 
-  // Dedicated consumer seed fund gets a +5 thesis-fit bonus.
-  const bonus = match.type === "seed-fund" ? 5 : 0;
+  // Dedicated consumer seed fund gets a thesis-fit bonus.
+  const bonus = match.type === "seed-fund" ? SEED_FUND_THESIS_BONUS : 0;
   const score = Math.min(100, base + bonus);
 
   const stages = match.primaryStages.join("/");
@@ -136,24 +136,10 @@ function formatAum(aumUsdMn: number): string {
   return `$${aumUsdMn}M AUM`;
 }
 
-/** Quality base when AUM is undisclosed - derived from investor type/heft. */
-const NULL_AUM_BASE_BY_TYPE: Record<Investor["type"], number> = {
-  sovereign: 90,
-  strategic: 80,
-  "growth-equity": 70,
-  "family-office": 68,
-  "multi-stage": 65,
-  cvc: 62,
-  "seed-fund": 48,
-  "micro-vc": 42,
-  accelerator: 40,
-  "angel-network": 38,
-};
-
 // ── Base rate: median months between consecutive rounds, computed from the
 // real funding dataset. Converts to an expected stage-climb velocity. ─────────
 const CADENCE = roundCadence(FUNDING_ROUNDS);
-const EXPECTED_STAGES_PER_YEAR = CADENCE.medianMonths > 0 ? 12 / CADENCE.medianMonths : 0.7;
+const EXPECTED_STAGES_PER_YEAR = expectedStagesPerYear(CADENCE.medianMonths);
 
 /**
  * Stage-progression velocity — how fast a brand climbed the stage ladder,
@@ -170,7 +156,10 @@ export function computeStageVelocityScore(
 ): ComputedSignal {
   const stagesClimbed = STAGE_LADDER[stage] ?? 0;
   if (!lastRoundDate || stagesClimbed === 0) {
-    return { score: 50, derivation: "No funding rounds - stage velocity not measurable (neutral)" };
+    return {
+      score: STAGE_VELOCITY_NEUTRAL,
+      derivation: "No funding rounds - stage velocity not measurable (neutral)",
+    };
   }
   const lastYear = Number(lastRoundDate.slice(0, 4));
   const yearsElapsed = Math.max(0.5, lastYear - founded);
@@ -217,7 +206,10 @@ export function computeCoInvestmentCentralityScore(
   }
   const match = findInvestorByName(leadInvestorName);
   if (!match) {
-    return { score: 25, derivation: `${leadInvestorName} · not in network dataset (default 25)` };
+    return {
+      score: CENTRALITY_UNKNOWN_DEFAULT,
+      derivation: `${leadInvestorName} · not in network dataset (default ${CENTRALITY_UNKNOWN_DEFAULT})`,
+    };
   }
   const entry = CENTRALITY_BY_ID.get(match.id) ?? { raw: 0, links: 0 };
   const score = Math.max(5, Math.round((entry.raw / MAX_CENTRALITY) * 100));

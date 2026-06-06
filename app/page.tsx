@@ -66,7 +66,10 @@ export default function Home() {
           </p>
           <p className="text-zinc-600 text-sm mt-2">
             All data compiled from public sources and labelled where modeled. Signals measure attention and
-            distribution - not unit economics.
+            distribution - not unit economics.{" "}
+            <Link href="/methodology" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
+              How the scores are computed →
+            </Link>
           </p>
           <p className="text-zinc-500 text-sm mt-3">
             By <span className="text-zinc-300 font-medium">Shaurya Gulati</span> ·{" "}
