@@ -43,6 +43,18 @@
 
 ---
 
+## DONE (2026-06-06) — Investor DB robustness + upstream seed funds (feeds momentum)
+**Why:** momentum's investorQuality + coInvestmentCentrality signals match brand.lastRound.leadInvestor against investors.ts; every miss = default scores.
+1. [DONE 7ce3756] Fixed findInvestorByName: old first-word fallback made "L Catterton"->"l" a catch-all mis-matching Tiger Global/Accel/Warburg. Now normalised whole-name boundary matching. No regression.
+2. [DONE 6ea4313] Investor DB 30 -> 74. Two subagents:
+   - Institutional/strategic leads (24): Tiger Global, Accel, QED, Alpha Wave, Warburg, WestBridge, GIC, Prosus, Bessemer, Kalaari, Jungle, Goodwater, Fundamentum, Investcorp, Morgan Stanley PE, OrbiMed, Sofina, Verlinvest, 360 ONE, Amazon Smbhav, ITC, HUL, Bose, NewQuest.
+   - Upstream pre-seed/seed + angel networks (20): Anicut, V3, Cap Alpha, Ananta, Twenty Nine, Huddle, All In, 100X.VC, Antler India, Better Capital, Java, Sprout, WEH, 2am, Upsparks, Venture Catalysts, WFC, IPV, Mumbai Angels, IAN.
+3. [DONE] Extended Investor.type union (sovereign/angel-network/accelerator/micro-vc) + InvestorCard maps + investor-map header count (74).
+4. [DONE] investorQuality polish: $XB AUM formatting; null-AUM base derived from type (GIC sovereign 90, ITC/HUL/Bose strategic 80) instead of flat 45.
+5. [DONE] Verified re-scoring in preview: boAt->Warburg $56B(95), Slice->Tiger(95), UrbanCompany->Prosus $6.5B(95), CRED->GIC(90), House of Chikankari->Cap Alpha(53), ClayCo->Twenty Nine, Bacca Bucci->Ananta, Fraganote->V3. No regression (Bombay Shaving->Sixth Sense). tsc+build clean; deploy green; live verified.
+6. [INTENTIONAL] Left pure angels/promoters as defaults (Hardik Pandya, Deep Bajaj, Ashish Kacholia, Chona/Jindal family) - low investor-quality is accurate signal there.
+- Honest caveats respected: Anicut NOT linked to Gully Labs (unverified; Saama already covers it); Kalaari/Nua and Jungle/TAC links flagged - funds added with verified portfolios, brand still matches by name.
+
 ## DONE (2026-06-06) — Session B: Validation / base-rates backtest
 **Shipped & live** (commit b7fcc28). BaseRatesPanel on the graduation funnel computes, live from the 89 sourced rounds:
 - Stage mix (Seed 7 / Series A 27 / Series B 27 / Series C+ 25) — `stageBreakdown`
