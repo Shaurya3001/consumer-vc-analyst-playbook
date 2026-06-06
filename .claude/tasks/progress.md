@@ -77,7 +77,16 @@
 - DELIBERATELY did NOT derive cohorts from the brand list (winner-biased) - kept modeled/indicative per the Session B survivorship finding. FinTech/Internet modeled to graduate slightly higher in 2019-21, cut harder post-2022 (RBI digital-lending tightening) - matches India funding history.
 - Verified: funnel total 612 -> 1151 seed rounds; aggregate seed->A holds at 27% (315/1151), confirming methodology consistency; 11 bars render with correct live tooltips; tsc + next build clean; deploy green; live HTML confirmed (contains 1151, not 612). Commit b2353f9.
 
+## 2026-06-06 — Scoring methodology page (commit 71f7381)
+
+### Actions
+- New /methodology page documents the Momentum Score end to end: 6 signals (computed vs estimated), weighting model, score legend, exact investor-quality AUM tiers + null-AUM-by-type table, stage-velocity ladder + live base rate.
+- Created lib/data/scoring-spec.ts as SINGLE SOURCE OF TRUTH for all scoring constants; refactored brand-signals.ts to import them (so docs can't drift from the scorer). Verified behaviour-preserving (boAt 95 / CRED 90 / Noise 80 / Bombay 85 / Suta 0 unchanged).
+- components/methodology/SignalSpecCard + ScoringTables. Linked from homepage header + momentum dashboard subtitle.
+- tsc + next build clean; deploy green; live at /methodology (200, content verified).
+
 ### Possible next work (no longer reserved)
+- Dashboard legend + MomentumRow SCORE_BG could import SCORE_BANDS from scoring-spec (further DRY; low priority - numbers already match)
 - White-space map could get the same observed-vs-modeled treatment + the 5 new sectors
 - Momentum stage-velocity edge case: brand founded long ago + recent first raise reads as "slow" (flagged in Session A handoff)
 - cohorts.ts COHORT_YEARS still 2019-2024; could add 2025 vintage (near-zero graduation by mid-2026, low value)
