@@ -85,6 +85,17 @@
 - components/methodology/SignalSpecCard + ScoringTables. Linked from homepage header + momentum dashboard subtitle.
 - tsc + next build clean; deploy green; live at /methodology (200, content verified).
 
+## 2026-06-06 — Investor status pass + exits tracker refresh
+
+### Actions
+- Two background research agents: (1) verified all 74 investors for acquisition/rebrand/wind-down - ALL STABLE (Cap Alpha = ex-CAAF already noted; WFC had a leadership death but operates - no data change). (2) Exits tracker corrections + new deals.
+- Exits tracker (commit 431e1fa): 13 -> 22 deals.
+  - Corrections: Wellbeing Nutrition reclassified HUL->USV (HUL held 19.8% minority, divested to USV Feb 2026); OZiva full buyout (Rs 824 Cr); Yoga Bar date Jan2022->Jan2023 + ITC control Apr 2026; Minimalist 90.5%; The Man Company Emami full buyout; fixed garbled emami-trunativ text.
+  - New: Marico->Cosmix + Skinetiq (resolves Marico's 3 early-2026 deals), Tata->Capital Foods + Organic India, ITC->24 Mantra (Sresta) + Prasuma, Dabur->Sesa, Reliance->TagZ + Pahadi Local.
+  - New acquirers + chip colors; leaderboard/insights recomputed; biggest exit now Capital Foods->Tata (Rs 5,100 Cr / $607M); $1,782M total disclosed.
+  - Fixed in-place ACQUISITIONS.sort() mutation in the page.
+- tsc + next build clean; deploy green; live verified (Cosmix/Capital Foods/USV present).
+
 ### Possible next work (no longer reserved)
 - Dashboard legend + MomentumRow SCORE_BG could import SCORE_BANDS from scoring-spec (further DRY; low priority - numbers already match)
 - White-space map could get the same observed-vs-modeled treatment + the 5 new sectors
