@@ -75,6 +75,8 @@ export default function Home() {
             By <span className="text-zinc-300 font-medium">Shaurya Gulati</span> ·{" "}
             <a href="https://www.linkedin.com/in/shaurya-gulati/" target="_blank" rel="noopener noreferrer"
               className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">LinkedIn</a> ·{" "}
+            <a href="https://github.com/Shaurya3001" target="_blank" rel="noopener noreferrer"
+              className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">GitHub</a> ·{" "}
             <a href="mailto:shauryagulati3001@gmail.com"
               className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">shauryagulati3001@gmail.com</a>
           </p>

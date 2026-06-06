@@ -35,6 +35,16 @@ export default function SiteFooter() {
             </a>
             <span className="text-zinc-700">·</span>
             <a
+              href="https://github.com/Shaurya3001"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+              aria-label="Shaurya Gulati on GitHub"
+            >
+              GitHub
+            </a>
+            <span className="text-zinc-700">·</span>
+            <a
               href="mailto:shauryagulati3001@gmail.com"
               className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
               aria-label="Email Shaurya Gulati"
