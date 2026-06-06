@@ -34,9 +34,9 @@ export default function InvestorMapPage() {
         <Link href="/" className="text-zinc-500 hover:text-zinc-300 text-sm block mb-1">← Home</Link>
         <h1 className="text-xl font-bold">Investor Activity Map</h1>
         <p className="text-zinc-500 text-xs mt-0.5 max-w-3xl">
-          29 verified India consumer VCs. Pick an anchor investor below - the syndicate shortlist
-          ranks every other fund as a Natural Ally, Untapped Fit, or Parallel Player.
-          Same data, different signs.
+          74 verified India consumer investors - pre-seed and angel networks through growth, PE,
+          strategics and sovereigns. Pick an anchor below - the syndicate shortlist ranks every
+          other fund as a Natural Ally, Untapped Fit, or Parallel Player. Same data, different signs.
         </p>
       </div>
 

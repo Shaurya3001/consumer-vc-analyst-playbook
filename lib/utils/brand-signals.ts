@@ -99,33 +99,56 @@ export function computeInvestorQualityScore(leadInvestorName: string | undefined
 
   const aum = match.aumUsdMn;
   let base: number;
-  if (aum === null) {
-    base = 45;
-  } else if (aum >= 1000) {
-    base = 95;
-  } else if (aum >= 500) {
-    base = 85;
-  } else if (aum >= 200) {
-    base = 75;
-  } else if (aum >= 100) {
-    base = 65;
-  } else if (aum >= 50) {
-    base = 55;
+  let basis: string;
+  if (aum !== null) {
+    // Disclosed AUM drives the tier directly.
+    if (aum >= 1000) base = 95;
+    else if (aum >= 500) base = 85;
+    else if (aum >= 200) base = 75;
+    else if (aum >= 100) base = 65;
+    else if (aum >= 50) base = 55;
+    else base = 45;
+    basis = formatAum(aum);
   } else {
-    base = 45;
+    // No disclosed AUM (sovereigns, strategics, angel networks) - estimate from
+    // investor type so a GIC or an HUL is not penalised to the unknown-fund floor.
+    base = NULL_AUM_BASE_BY_TYPE[match.type] ?? 45;
+    basis = "AUM undisclosed";
   }
 
-  // Dedicated consumer fund gets a +5 bonus (thesis fit)
+  // Dedicated consumer seed fund gets a +5 thesis-fit bonus.
   const bonus = match.type === "seed-fund" ? 5 : 0;
   const score = Math.min(100, base + bonus);
 
-  const aumStr = aum !== null ? `$${aum}M AUM` : "AUM undisclosed";
   const stages = match.primaryStages.join("/");
   return {
     score,
-    derivation: `${match.name} · ${aumStr} · ${stages} · ${match.type}`,
+    derivation: `${match.name} · ${basis} · ${stages} · ${match.type}`,
   };
 }
+
+/** Format a USD-millions AUM as $X.YB above 1,000M, else $XM. */
+function formatAum(aumUsdMn: number): string {
+  if (aumUsdMn >= 1000) {
+    const b = aumUsdMn / 1000;
+    return `$${b % 1 === 0 ? b : b.toFixed(1)}B AUM`;
+  }
+  return `$${aumUsdMn}M AUM`;
+}
+
+/** Quality base when AUM is undisclosed - derived from investor type/heft. */
+const NULL_AUM_BASE_BY_TYPE: Record<Investor["type"], number> = {
+  sovereign: 90,
+  strategic: 80,
+  "growth-equity": 70,
+  "family-office": 68,
+  "multi-stage": 65,
+  cvc: 62,
+  "seed-fund": 48,
+  "micro-vc": 42,
+  accelerator: 40,
+  "angel-network": 38,
+};
 
 // ── Base rate: median months between consecutive rounds, computed from the
 // real funding dataset. Converts to an expected stage-climb velocity. ─────────

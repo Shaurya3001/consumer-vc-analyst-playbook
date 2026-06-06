@@ -10,20 +10,28 @@ interface InvestorCardProps {
 
 const TYPE_COLORS: Record<Investor["type"], string> = {
   "seed-fund": "bg-emerald-900 text-emerald-300 border-emerald-700",
+  "micro-vc": "bg-teal-900 text-teal-300 border-teal-700",
+  "angel-network": "bg-lime-900 text-lime-300 border-lime-700",
+  "accelerator": "bg-green-900 text-green-300 border-green-700",
   "multi-stage": "bg-blue-900 text-blue-300 border-blue-700",
   "growth-equity": "bg-violet-900 text-violet-300 border-violet-700",
   "strategic": "bg-amber-900 text-amber-300 border-amber-700",
   "family-office": "bg-rose-900 text-rose-300 border-rose-700",
   "cvc": "bg-cyan-900 text-cyan-300 border-cyan-700",
+  "sovereign": "bg-indigo-900 text-indigo-300 border-indigo-700",
 };
 
 const TYPE_LABELS: Record<Investor["type"], string> = {
   "seed-fund": "Seed",
+  "micro-vc": "Micro-VC",
+  "angel-network": "Angel Network",
+  "accelerator": "Accelerator",
   "multi-stage": "Multi-stage",
   "growth-equity": "Growth/PE",
   "strategic": "Strategic",
   "family-office": "Family Office",
   "cvc": "CVC",
+  "sovereign": "Sovereign",
 };
 
 export default function InvestorCard({ investor, isAnchor, onSelect }: InvestorCardProps) {
