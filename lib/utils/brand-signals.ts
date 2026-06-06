@@ -28,16 +28,36 @@ const STAGE_LADDER: Record<Stage, number> = {
 };
 
 /**
- * Lead-investor lookup by fuzzy name match (shared by quality + centrality).
- * Mirrors the matching the investor dataset already supports.
+ * Normalise an investor name for matching: lowercase, drop parentheticals like
+ * "(India fund)", strip punctuation, collapse whitespace.
+ */
+function normalizeInvestor(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/\([^)]*\)/g, " ") // drop "(India fund)", "(Japan)", etc.
+    .replace(/[^a-z0-9& ]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Lead-investor lookup, shared by quality + centrality.
+ *
+ * Matches on whole, normalised names only - either name is an exact match or a
+ * word-boundary prefix of the other (e.g. lead "Unilever Ventures" matches inv
+ * "Unilever Ventures India"; lead "Fireside" matches "Fireside Ventures").
+ * The old version fell back to the investor's FIRST WORD, which for "L Catterton"
+ * was the single letter "l" - a catch-all that mis-matched any lead containing an
+ * "l" (Tiger Global, Accel, ...). Whole-name boundary matching removes that.
  */
 function findInvestorByName(name: string): Investor | undefined {
-  const lower = name.toLowerCase();
-  return INVESTORS.find(
-    (inv) =>
-      inv.name.toLowerCase().includes(lower) ||
-      lower.includes(inv.name.toLowerCase().split(" ")[0]),
-  );
+  const lead = normalizeInvestor(name);
+  if (!lead) return undefined;
+  return INVESTORS.find((inv) => {
+    const n = normalizeInvestor(inv.name);
+    if (!n) return false;
+    return n === lead || n.startsWith(`${lead} `) || lead.startsWith(`${n} `);
+  });
 }
 
 /**
