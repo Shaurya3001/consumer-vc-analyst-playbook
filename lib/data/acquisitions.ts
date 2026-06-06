@@ -8,16 +8,17 @@ export interface Acquisition {
   sector: Sector;
   dealSizeInrCr: number | null;   // null = undisclosed
   dealSizeUsdMn: number | null;
-  date: string;                   // YYYY-MM
+  date: string;                   // YYYY-MM (the control / VC-exit event)
   targetFoundedYear: number;
   targetLastVcStage: string;
   rationale: string;              // why the acquirer bought it
   sources: string[];
 }
 
-// Real Indian consumer D2C acquisitions 2020-2026.
-// FMCG incumbents increasingly building D2C portfolios through M&A.
-// These exits are the primary return path for India consumer VCs - IPO route is narrow.
+// Real Indian consumer brand acquisitions 2020-2026 (D2C and PE-backed).
+// Strategic M&A - not IPO - is the primary return path for India consumer VCs.
+// For two-step deals, date + size refer to the control/VC-exit event; later
+// full buyouts are noted in the rationale.
 export const ACQUISITIONS: Acquisition[] = [
 
   // ── HUL ──────────────────────────────────────────────────────────────────
@@ -32,12 +33,12 @@ export const ACQUISITIONS: Acquisition[] = [
     date: "2025-01",
     targetFoundedYear: 2020,
     targetLastVcStage: "Series A",
-    rationale: "Ingredient-forward skincare at mass-market pricing complemented HUL's Lakmé/Pond's portfolio. ~10x return for Peak XV Partners from Series A.",
-    sources: ["https://www.business-standard.com/amp/article/companies/skincare-brand-minimalist-raises-rs-110-crore-through-multiple-investors-121072900126_1.html"],
+    rationale: "Ingredient-forward skincare at mass-market pricing complemented HUL's Lakmé/Pond's portfolio. HUL acquired 90.5% (completed Apr 2025; remaining 9.5% slated ~2027). ~10x return for Peak XV Partners from Series A.",
+    sources: ["https://beautymatter.com/articles/hul-to-acquire-indian-skincare-brand-minimalist-in-a-340-million-deal"],
   },
   {
     id: "hul-oziva",
-    target: "OZiva",
+    target: "OZiva (Zywie Ventures)",
     acquirer: "Hindustan Unilever (HUL)",
     acquirerType: "fmcg-incumbent",
     sector: "Health & Wellness",
@@ -46,38 +47,68 @@ export const ACQUISITIONS: Acquisition[] = [
     date: "2022-11",
     targetFoundedYear: 2016,
     targetLastVcStage: "Series B",
-    rationale: "Plant-based nutrition and wellness - HUL's entry into premium D2C health category.",
-    sources: ["https://inc42.com/buzz/hul-acquires-plant-based-nutrition-startup-oziva/"],
+    rationale: "HUL took majority (~51%) control in Nov 2022 - the VC exit - entering premium D2C health. It completed the full buyout of the remaining 49% for ₹824 Cr (~$98M) in Feb 2026 to reach 100%.",
+    sources: ["https://www.hul.co.in/news/press-releases/2026/hul-invests-rs-824-crores-to-acquire-remaining-49-stake-in-zywie-ventures-oziva-divests-198-holding-in-nutritionalab/"],
   },
+
+  // ── USV (pharma) ──────────────────────────────────────────────────────────
   {
-    id: "hul-wellbeing-nutrition",
-    target: "Wellbeing Nutrition",
-    acquirer: "Hindustan Unilever (HUL)",
-    acquirerType: "fmcg-incumbent",
+    id: "usv-nutritionalab",
+    target: "Wellbeing Nutrition (Nutritionalab)",
+    acquirer: "USV",
+    acquirerType: "strategic",
     sector: "Health & Wellness",
-    dealSizeInrCr: null,
-    dealSizeUsdMn: null,
-    date: "2024-06",
+    dealSizeInrCr: 1583,
+    dealSizeUsdMn: 188,
+    date: "2026-02",
     targetFoundedYear: 2019,
     targetLastVcStage: "Series B",
-    rationale: "Nutraceutical melting strips and clean supplements - deepened HUL's health portfolio post-OZiva.",
-    sources: ["https://www.businesstoday.in/latest/corporate/story/wellbeing-nutrition-raises-10-million-in-a-series-b-round-led-by-hul-fireside-ventures-356091-2022-12-12"],
+    rationale: "Pharma major USV acquired 79% of nutraceutical brand Wellbeing Nutrition (₹1,583 Cr). HUL - which held a 19.8% minority stake from 2022 - divested it to USV for ₹307 Cr (~430% return), so this is a pharma acquisition, not an HUL one.",
+    sources: ["https://www.business-standard.com/companies/news/hul-sells-19-8pc-stake-nutritionalab-usv-acquires-79pc-rs1583cr-126021201796_1.html"],
   },
 
   // ── ITC ───────────────────────────────────────────────────────────────────
   {
     id: "itc-yoga-bar",
-    target: "Yoga Bar",
+    target: "Yoga Bar (Sproutlife Foods)",
     acquirer: "ITC",
     acquirerType: "fmcg-incumbent",
     sector: "F&B Packaged",
     dealSizeInrCr: 600,
     dealSizeUsdMn: 72,
-    date: "2022-01",
+    date: "2023-01",
     targetFoundedYear: 2014,
     targetLastVcStage: "Series B",
-    rationale: "ITC's first major D2C acquisition - healthy snacks/breakfast category to diversify from tobacco and FMCG staples.",
-    sources: ["https://inc42.com/buzz/itc-acquires-healthy-snack-brand-yoga-bar/"],
+    rationale: "ITC's first major D2C acquisition - healthy snacks/breakfast to diversify beyond tobacco and FMCG staples. ITC raised its stake to ~47.5% with board control, making Sproutlife an ITC subsidiary effective Apr 1, 2026.",
+    sources: ["https://www.business-standard.com/markets/capital-market-news/itc-acquires-sproutlife-yoga-bar-126040100491_1.html"],
+  },
+  {
+    id: "itc-sresta",
+    target: "Sresta Natural Bioproducts (24 Mantra Organic)",
+    acquirer: "ITC",
+    acquirerType: "fmcg-incumbent",
+    sector: "F&B Packaged",
+    dealSizeInrCr: 473,
+    dealSizeUsdMn: 56,
+    date: "2025-06",
+    targetFoundedYear: 2004,
+    targetLastVcStage: "PE-backed (Peepul Capital)",
+    rationale: "ITC acquired 100% of Sresta (₹472.5 Cr, completed Jun 2025) to lead the premium organic packaged-foods category under 24 Mantra Organic.",
+    sources: ["https://www.business-standard.com/companies/news/itc-completes-acquisition-of-24-mantra-organic-brand-owner-sresta-natural-125061400496_1.html"],
+  },
+  {
+    id: "itc-prasuma",
+    target: "Prasuma",
+    acquirer: "ITC",
+    acquirerType: "fmcg-incumbent",
+    sector: "F&B Packaged",
+    dealSizeInrCr: 300,
+    dealSizeUsdMn: 36,
+    date: "2025-02",
+    targetFoundedYear: 2006,
+    targetLastVcStage: "Bootstrapped / promoter-owned",
+    rationale: "ITC took 43.8% upfront (~₹131 Cr) of Prasuma with a path to 100% by 2028, expanding into premium frozen momos/baos, ready-to-cook and delicatessen meats.",
+    sources: ["https://www.business-standard.com/companies/news/itc-to-acquire-prasuma-expanding-footprint-in-frozen-ready-to-cook-foods-125020601693_1.html"],
   },
   {
     id: "itc-mylo",
@@ -90,7 +121,7 @@ export const ACQUISITIONS: Acquisition[] = [
     date: "2024-03",
     targetFoundedYear: 2017,
     targetLastVcStage: "Series A",
-    rationale: "Parenting and baby care D2C platform - ITC expanding into fast-growing baby care category.",
+    rationale: "Parenting and baby care D2C platform - ITC expanding into the fast-growing baby care category.",
     sources: ["https://www.loestro.com/indias-d2c-brand-ma-playbook-from-bootstrapped-hustle-to-strategic-exit/"],
   },
   {
@@ -120,7 +151,7 @@ export const ACQUISITIONS: Acquisition[] = [
     date: "2020-03",
     targetFoundedYear: 2015,
     targetLastVcStage: "Seed",
-    rationale: "Men's grooming D2C - Marico's entry into India's emerging male grooming category.",
+    rationale: "Men's grooming D2C - Marico's entry into India's emerging male grooming category (51% in 2017, full ownership by 2020).",
     sources: ["https://inc42.com/buzz/marico-acquires-51-stake-in-beardo-to-enter-mens-grooming-segment/"],
   },
   {
@@ -148,7 +179,7 @@ export const ACQUISITIONS: Acquisition[] = [
     date: "2021-09",
     targetFoundedYear: 2011,
     targetLastVcStage: "Seed",
-    rationale: "Ayurvedic premium beauty - Marico building natural beauty portfolio.",
+    rationale: "Ayurvedic premium beauty - Marico building a natural beauty portfolio.",
     sources: ["https://www.finnovate.in/learn/blog/fmcg-buying-d2c-brands-india"],
   },
   {
@@ -162,7 +193,7 @@ export const ACQUISITIONS: Acquisition[] = [
     date: "2023-03",
     targetFoundedYear: 2019,
     targetLastVcStage: "Series A",
-    rationale: "Plant-based health supplements - Marico's health and wellness D2C expansion beyond beauty.",
+    rationale: "Plant-based health supplements - Marico's wellness D2C expansion beyond beauty. Plix has since crossed ₹500 Cr ARR.",
     sources: ["https://inc42.com/buzz/marico-acquires-plant-based-supplement-brand-plix/"],
   },
   {
@@ -175,9 +206,113 @@ export const ACQUISITIONS: Acquisition[] = [
     dealSizeUsdMn: 27,
     date: "2026-01",
     targetFoundedYear: 2014,
-    targetLastVcStage: "Strategic (PVR INOX)",
-    rationale: "Premium gourmet popcorn/snacking brand acquired from PVR INOX for ₹226.8 Cr - first of Marico's three 2026 acquisitions doubling down on premium snacking. Marico targets ₹1,000 Cr D2C ARR in FY26 (Plix already past ₹500 Cr).",
+    targetLastVcStage: "Strategic (from PVR INOX)",
+    rationale: "Premium gourmet popcorn/snacking brand bought from PVR INOX for ₹226.8 Cr - the first of Marico's three early-2026 acquisitions (with Cosmix and Skinetiq), doubling down on premium snacking.",
     sources: ["https://inc42.com/features/how-marico-turns-d2c-founder-dna-into-fmcg-scale/"],
+  },
+  {
+    id: "marico-cosmix",
+    target: "Cosmix",
+    acquirer: "Marico",
+    acquirerType: "fmcg-incumbent",
+    sector: "Health & Wellness",
+    dealSizeInrCr: 226,
+    dealSizeUsdMn: 27,
+    date: "2026-02",
+    targetFoundedYear: 2019,
+    targetLastVcStage: "Bootstrapped / founder-funded",
+    rationale: "Marico took 60% of plant-based protein and functional-wellness brand Cosmix (~₹375 Cr valuation), with an option for the rest after FY29 - extending its founder-led wellness portfolio alongside Plix.",
+    sources: ["https://entrackr.com/fintrackr/cosmix-by-the-numbers-what-marico-gets-in-its-latest-d2c-acquisition-11078159"],
+  },
+  {
+    id: "marico-skinetiq",
+    target: "Skinetiq (Vietnam)",
+    acquirer: "Marico",
+    acquirerType: "fmcg-incumbent",
+    sector: "Beauty & Personal Care",
+    dealSizeInrCr: 262,
+    dealSizeUsdMn: 40,
+    date: "2026-04",
+    targetFoundedYear: 2021,
+    targetLastVcStage: "Bootstrapped / founder-led",
+    rationale: "Marico bought 75% of Vietnamese Gen-Z D2C skincare firm Skinetiq (completed Apr 2026), its first SE-Asia D2C beauty play, with rights to the rest after FY28.",
+    sources: ["https://www.business-standard.com/companies/news/marico-signs-pact-to-buy-majority-stake-in-vietnamese-d2c-company-skinetiq-126020901348_1.html"],
+  },
+
+  // ── Tata Consumer Products ────────────────────────────────────────────────
+  {
+    id: "tata-capital-foods",
+    target: "Capital Foods (Ching's Secret)",
+    acquirer: "Tata Consumer Products",
+    acquirerType: "fmcg-incumbent",
+    sector: "F&B Packaged",
+    dealSizeInrCr: 5100,
+    dealSizeUsdMn: 607,
+    date: "2024-01",
+    targetFoundedYear: 1995,
+    targetLastVcStage: "PE-backed (General Atlantic, ADIA)",
+    rationale: "Tata acquired 75% upfront (rest within 3 years) of Capital Foods to enter high-growth Desi-Chinese (Ching's Secret) and Western cooking categories. The largest consumer M&A in this set.",
+    sources: ["https://www.foodbev.com/news/tata-consumer-products-buys-capital-foods-and-organic-india"],
+  },
+  {
+    id: "tata-organic-india",
+    target: "Organic India",
+    acquirer: "Tata Consumer Products",
+    acquirerType: "fmcg-incumbent",
+    sector: "F&B Packaged",
+    dealSizeInrCr: 1900,
+    dealSizeUsdMn: 226,
+    date: "2024-01",
+    targetFoundedYear: 1997,
+    targetLastVcStage: "PE-backed",
+    rationale: "Tata bought 100% of Organic India to expand in organic packaged foods, herbal supplements and tea/infusions across India and export markets.",
+    sources: ["https://www.just-food.com/news/tata-consumer-products-buys-capital-foods-organic-india/"],
+  },
+
+  // ── Dabur ─────────────────────────────────────────────────────────────────
+  {
+    id: "dabur-sesa",
+    target: "Sesa Care",
+    acquirer: "Dabur India",
+    acquirerType: "fmcg-incumbent",
+    sector: "Beauty & Personal Care",
+    dealSizeInrCr: 320,
+    dealSizeUsdMn: 38,
+    date: "2024-10",
+    targetFoundedYear: 1994,
+    targetLastVcStage: "PE-backed (True North)",
+    rationale: "Dabur acquired 100% of Sesa Care (EV ~₹315-325 Cr, cash + share-swap merger) to strengthen its ayurvedic hair-oil leadership; Sesa is the #3 player in the category.",
+    sources: ["https://www.business-standard.com/companies/news/dabur-to-acquire-ayurvedic-product-maker-sesa-care-for-rs-315-325-crore-124103000909_1.html"],
+  },
+
+  // ── Reliance Consumer / Retail ────────────────────────────────────────────
+  {
+    id: "reliance-tagz",
+    target: "TagZ Foods",
+    acquirer: "Reliance Consumer Products",
+    acquirerType: "fmcg-incumbent",
+    sector: "F&B Packaged",
+    dealSizeInrCr: 28,
+    dealSizeUsdMn: 3,
+    date: "2024-11",
+    targetFoundedYear: 2019,
+    targetLastVcStage: "Seed (raised ~$3.2M)",
+    rationale: "Reliance bought the struggling D2C popped-chips brand TagZ in a distress/fire sale (~₹28 Cr) to bolster its packaged-snacks portfolio.",
+    sources: ["https://inc42.com/buzz/exclusive-reliance-to-acquire-tagz-foods-for-inr-28-cr-in-a-fire-sale/"],
+  },
+  {
+    id: "reliance-pahadi-local",
+    target: "Pahadi Local",
+    acquirer: "Reliance Retail",
+    acquirerType: "fmcg-incumbent",
+    sector: "Beauty & Personal Care",
+    dealSizeInrCr: null,
+    dealSizeUsdMn: null,
+    date: "2026-03",
+    targetFoundedYear: 2018,
+    targetLastVcStage: "Bootstrapped / early",
+    rationale: "Reliance Retail acquired clean Himalayan-ingredient skincare brand Pahadi Local (Gutti Ka Tel/apricot oil) to expand its beauty house of brands; founders retained for creative direction.",
+    sources: ["https://www.business-standard.com/markets/capital-market-news/reliance-retail-completes-acquisition-of-pahadi-local-brand-126030900839_1.html"],
   },
 
   // ── Emami ─────────────────────────────────────────────────────────────────
@@ -192,7 +327,7 @@ export const ACQUISITIONS: Acquisition[] = [
     date: "2022-09",
     targetFoundedYear: 2015,
     targetLastVcStage: "Series A",
-    rationale: "Premium men's grooming D2C - Emami's counterpart to Marico's Beardo acquisition.",
+    rationale: "Premium men's grooming D2C - Emami's counterpart to Marico's Beardo. Emami took majority control in 2022, then bought the remaining 49.6% for ₹177.6 Cr in 2024 to reach 100%.",
     sources: ["https://inc42.com/buzz/emami-acquires-the-man-company/"],
   },
   {
@@ -206,7 +341,7 @@ export const ACQUISITIONS: Acquisition[] = [
     date: "2024-01",
     targetFoundedYear: 2020,
     targetLastVcStage: "Seed",
-    rationale: "Clean protein nutrition - Emami entering fast42 2026-listed brand category.",
+    rationale: "Clean protein nutrition - Emami's entry into the fast-growing functional-nutrition category.",
     sources: ["https://www.loestro.com/indias-d2c-brand-ma-playbook-from-bootstrapped-hustle-to-strategic-exit/"],
   },
 ];
@@ -215,12 +350,16 @@ export const ACQUISITIONS: Acquisition[] = [
 export const ACQUISITION_INSIGHTS = {
   totalTracked: ACQUISITIONS.length,
   totalDisclosedUsdMn: ACQUISITIONS.filter(a => a.dealSizeUsdMn).reduce((s, a) => s + (a.dealSizeUsdMn ?? 0), 0),
-  biggestExit: "Minimalist → HUL at ₹2,955 Cr (~$350M), Jan 2025 - ~10x for Peak XV",
-  keyInsight: "70%+ of FMCG acquisitions of D2C brands since 2020. Strategic M&A - not IPO - is the primary VC exit route in India consumer. Marico opened 2026 with three quick acquisitions (4700BC among them), doubling down on premium snacking and youth-led categories.",
+  biggestExit: "Capital Foods → Tata Consumer at ₹5,100 Cr (~$607M), Jan 2024 - the largest. Minimalist → HUL (₹2,955 Cr, ~10x for Peak XV) is the biggest pure-D2C-VC exit.",
+  keyInsight: "Strategic M&A - not IPO - is the primary exit route in India consumer. FMCG incumbents (HUL, ITC, Marico, Tata, Dabur, Emami) and now Reliance are building portfolios by buying D2C and founder-led brands. Marico alone did three acquisitions in early 2026 (4700BC, Cosmix, Skinetiq).",
   acquirerLeaderboard: [
-    { name: "Hindustan Unilever (HUL)", deals: 3, totalUsdMn: 350, note: "Most active by value - Minimalist, OZiva, Wellbeing Nutrition" },
-    { name: "Marico", deals: 5, totalUsdMn: 139, note: "Beardo, True Elements, Just Herbs, Plix, 4700BC (Jan 2026)" },
-    { name: "ITC", deals: 3, totalUsdMn: 72, note: "Yoga Bar, Mylo, Mother Sparsh" },
+    { name: "Marico", deals: 7, totalUsdMn: 206, note: "Beardo, True Elements, Just Herbs, Plix, 4700BC, Cosmix, Skinetiq" },
+    { name: "ITC", deals: 5, totalUsdMn: 164, note: "Yoga Bar, 24 Mantra (Sresta), Prasuma, Mylo, Mother Sparsh" },
+    { name: "Tata Consumer Products", deals: 2, totalUsdMn: 833, note: "Capital Foods (Ching's), Organic India - biggest by value" },
+    { name: "Hindustan Unilever (HUL)", deals: 2, totalUsdMn: 350, note: "Minimalist, OZiva (full buyout 2026)" },
+    { name: "USV", deals: 1, totalUsdMn: 188, note: "Wellbeing Nutrition - HUL divested its 19.8% stake to USV" },
+    { name: "Dabur India", deals: 1, totalUsdMn: 38, note: "Sesa Care (ayurvedic hair oil)" },
+    { name: "Reliance Consumer Products", deals: 2, totalUsdMn: 3, note: "TagZ Foods, Pahadi Local" },
     { name: "Emami", deals: 2, totalUsdMn: null, note: "The Man Company, Trunativ" },
   ],
 };

@@ -43,7 +43,7 @@ const APPLETS = [
   {
     slug: "exits-tracker",
     title: "Exits & Acquisitions Tracker",
-    description: "HUL, ITC, Marico, Emami - who bought what, for how much. M&A is the primary VC exit route in India consumer.",
+    description: "22 deals - HUL, ITC, Marico, Tata, Reliance, Dabur and more - who bought what, for how much. M&A is the primary VC exit route in India consumer.",
     icon: "🤝",
   },
   {

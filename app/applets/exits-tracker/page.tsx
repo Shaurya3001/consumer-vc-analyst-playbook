@@ -7,6 +7,11 @@ const ACQUIRER_COLORS: Record<string, string> = {
   "ITC": "bg-amber-900 text-amber-300 border-amber-700",
   "Marico": "bg-emerald-900 text-emerald-300 border-emerald-700",
   "Emami": "bg-violet-900 text-violet-300 border-violet-700",
+  "Tata Consumer Products": "bg-cyan-900 text-cyan-300 border-cyan-700",
+  "Reliance Consumer Products": "bg-rose-900 text-rose-300 border-rose-700",
+  "Reliance Retail": "bg-rose-900 text-rose-300 border-rose-700",
+  "Dabur India": "bg-lime-900 text-lime-300 border-lime-700",
+  "USV": "bg-fuchsia-900 text-fuchsia-300 border-fuchsia-700",
 };
 
 function acquirerChip(name: string) {
@@ -76,7 +81,7 @@ export default function ExitsTrackerPage() {
       <div className="px-6 pb-10">
         <h2 className="text-sm font-semibold text-zinc-300 mb-3">All tracked deals</h2>
         <div className="space-y-3">
-          {ACQUISITIONS.sort((a, b) => b.date.localeCompare(a.date)).map((acq) => (
+          {[...ACQUISITIONS].sort((a, b) => b.date.localeCompare(a.date)).map((acq) => (
             <div key={acq.id} className="border border-zinc-800 bg-zinc-900/50 rounded-xl p-4 flex flex-col sm:flex-row sm:items-start gap-4">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap mb-1">
