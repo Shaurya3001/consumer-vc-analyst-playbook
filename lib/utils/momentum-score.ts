@@ -99,27 +99,7 @@ export function computeMomentumScore(
   };
 }
 
-export function computeLtvCac(params: {
-  aov: number;
-  repeatRate: number;
-  cac: number;
-  contributionMargin: number;
-  returnRate: number;
-  avgOrderFrequency: number;
-}): { ltv: number; ltvCacRatio: number; paybackMonths: number } {
-  const { aov, repeatRate, cac, contributionMargin, returnRate, avgOrderFrequency } = params;
-  const effectiveAov = aov * (1 - returnRate);
-  const annualRevenue = effectiveAov * avgOrderFrequency;
-  const annualContribution = annualRevenue * contributionMargin;
-  const avgLifespanYears = repeatRate > 0 ? Math.min(1 / (1 - repeatRate) / 12, 5) : 1;
-  const ltv = annualContribution * avgLifespanYears;
-  const ltvCacRatio = cac > 0 ? ltv / cac : 0;
-  const monthlyContribution = annualContribution / 12;
-  const paybackMonths = monthlyContribution > 0 ? Math.ceil(cac / monthlyContribution) : 999;
-
-  return {
-    ltv: Math.round(ltv),
-    ltvCacRatio: Math.round(ltvCacRatio * 10) / 10,
-    paybackMonths,
-  };
-}
+// NOTE: the unit-economics LTV/CAC model lives in lib/utils/unit-economics.ts
+// (computeUnitEconomics), which the sandbox uses. An earlier computeLtvCac helper
+// here was removed: it was unused and had a lifespan bug (divided by 12 instead of
+// by order frequency), so its LTV was wrong unless frequency happened to be 12.

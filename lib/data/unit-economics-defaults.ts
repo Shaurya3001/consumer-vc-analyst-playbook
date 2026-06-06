@@ -3,11 +3,11 @@ import type { Sector } from "./taxonomy";
 export interface UnitEconomicsDefaults {
   sector: Sector;
   aov: number;           // average order value, INR
-  repeatRate: number;    // monthly repeat purchase rate, 0-1
+  repeatRate: number;    // ANNUAL retention rate (share who buy again next year), 0-1 - drives lifespan = 1/(1-r)
   cac: number;           // customer acquisition cost, INR
   contributionMargin: number; // contribution margin %, 0-1
   returnRate: number;    // % orders returned, 0-1
-  avgOrderFrequency: number;  // orders per year per customer
+  avgOrderFrequency: number;  // orders per year per active customer
 }
 
 // Representative India-market defaults - modeled on public benchmark data
