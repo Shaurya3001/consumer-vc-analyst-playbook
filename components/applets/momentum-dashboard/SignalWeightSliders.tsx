@@ -49,10 +49,19 @@ const SIGNAL_META: {
     color: "bg-cyan-500",
     computed: true,
   },
+  {
+    key: "distributionBreadthScore",
+    label: "Distribution Breadth",
+    description: "Verified channel mix, QC weighted highest - computed",
+    color: "bg-fuchsia-500",
+    computed: true,
+  },
 ];
 
 const KEYS = SIGNAL_META.map((s) => s.key);
-const MIN_WEIGHT = 5;
+// 0 allowed: zeroing a signal removes it from the score entirely, so a user can
+// search on any single thesis (e.g. pure distribution, pure funding heat).
+const MIN_WEIGHT = 0;
 
 export default function SignalWeightSliders({ weights, onChange }: SignalWeightSlidersProps) {
   // When slider i changes to newVal, redistribute the delta proportionally among others

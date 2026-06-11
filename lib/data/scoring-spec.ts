@@ -150,6 +150,18 @@ export const SIGNALS: SignalSpec[] = [
     source: "Computed from founded year, current stage, and the round-cadence base rate of the real funding dataset.",
     bootstrapped: `No rounds -> velocity not measurable -> neutral ${STAGE_VELOCITY_NEUTRAL}.`,
   },
+  {
+    key: "distributionBreadth",
+    label: "Distribution Breadth",
+    kind: "computed",
+    weightKey: "distributionBreadthScore",
+    accent: "text-fuchsia-400",
+    bar: "bg-fuchsia-500",
+    measures: "How widely the brand actually sells - its verified channel mix, with quick commerce weighted highest.",
+    formula: "Sum of channel weights: QC-native +35, Marketplace-led +20, Omnichannel +20, General Trade +15, Platform +10, D2C-first +10; capped at 100. QC carries the most weight because it is the fastest-growing format (Redseer: BPC on q-comm grew ~22.5x CY22-25).",
+    source: "Computed from the brand's GTM channel tags, which are compiled from funding coverage and public storefront listings.",
+    bootstrapped: "Applies equally to bootstrapped brands - distribution is observable without funding data.",
+  },
 ];
 
 // Co-investment centrality was removed from the momentum score (2026-06, user

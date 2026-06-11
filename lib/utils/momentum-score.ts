@@ -5,6 +5,7 @@ import {
   computeFundingRecencyScore,
   computeInvestorQualityScore,
   computeStageVelocityScore,
+  computeDistributionBreadthScore,
 } from "./brand-signals";
 
 export interface SignalDetail {
@@ -21,6 +22,7 @@ export interface MomentumResult {
     fundingRecency: SignalDetail;
     investorQuality: SignalDetail;
     stageVelocity: SignalDetail;
+    distributionBreadth: SignalDetail;
   };
   confidence: "high" | "medium" | "low";
 }
@@ -32,6 +34,7 @@ export function computeMomentumScore(
   const recency = computeFundingRecencyScore(brand.lastRound?.date);
   const investorQ = computeInvestorQualityScore(brand.lastRound?.leadInvestor);
   const velocity = computeStageVelocityScore(brand.founded, brand.stage, brand.lastRound?.date);
+  const breadth = computeDistributionBreadthScore(brand.gtmModels);
 
   const components: MomentumResult["components"] = {
     brandedSearch: {
@@ -59,21 +62,29 @@ export function computeMomentumScore(
       type: "computed",
       derivation: velocity.derivation,
     },
+    distributionBreadth: {
+      value: breadth.score,
+      type: "computed",
+      derivation: breadth.derivation,
+    },
   };
 
+  // Weights may legitimately be 0 (sliders go to 0); guard the degenerate all-zero case.
   const totalWeight =
     weights.brandedSearchScore +
     weights.earnedAffinityScore +
     weights.fundingRecencyScore +
     weights.investorQualityScore +
-    weights.stageVelocityScore;
+    weights.stageVelocityScore +
+    weights.distributionBreadthScore || 1;
 
   const weighted =
     (components.brandedSearch.value * weights.brandedSearchScore +
       components.earnedAffinity.value * weights.earnedAffinityScore +
       components.fundingRecency.value * weights.fundingRecencyScore +
       components.investorQuality.value * weights.investorQualityScore +
-      components.stageVelocity.value * weights.stageVelocityScore) /
+      components.stageVelocity.value * weights.stageVelocityScore +
+      components.distributionBreadth.value * weights.distributionBreadthScore) /
     totalWeight;
 
   // Confidence based on estimated signals having meaningful values (computed signals always present)

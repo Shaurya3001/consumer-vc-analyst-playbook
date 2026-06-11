@@ -90,7 +90,7 @@ export default function MomentumDashboardPage() {
             <h1 className="text-xl font-bold">Momentum Dashboard</h1>
             <p className="text-zinc-500 text-xs mt-0.5">
               73 brands across all 11 consumer sectors - funded and bootstrapped scouting targets.
-              4 signals computed from data (funding recency, investor quality, stage velocity, co-investment reach);
+              4 signals computed from data (funding recency, investor quality, stage velocity, distribution breadth);
               2 estimated. Re-weight to reflect your thesis.{" "}
               <Link href="/methodology" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
                 Full scoring methodology →
@@ -105,11 +105,11 @@ export default function MomentumDashboardPage() {
       </div>
 
       <TheRead>
-        Momentum is a sourcing signal, not a quality verdict. Read the mix: a brand high on paid-ad
-        velocity but low on branded search is buying growth, not earning it. The bootstrapped brands
-        score low on investor quality by design - that is the signal. Durable stories pair organic pull
-        with distribution reach; a maiden round at Rs 80 Cr bootstrapped revenue is a different risk
-        profile than a Series B at the same number.
+        Momentum is a sourcing signal, not a quality verdict. Read the mix: a brand high on funding
+        recency but thin on distribution breadth is capital looking for shelves; the reverse is a
+        business growing without burn. Zero any slider to search on a single thesis - distribution
+        only, funding heat only, organic pull only. Bootstrapped brands score low on funding-derived
+        signals by design - that is the signal, not a flaw.
       </TheRead>
 
       {/* Body: two-column on desktop */}
@@ -193,9 +193,10 @@ export default function MomentumDashboardPage() {
 
           <p className="text-xs text-zinc-700 leading-relaxed">
             Score = weighted blend of six signals. Four are computed from data - funding recency,
-            investor quality, stage velocity (vs observed round cadence), and co-investment reach
-            (lead investor syndicate centrality). Branded search and earned affinity are estimated
-            from public sources. Bootstrapped brands score 0 on investor signals - intentional.
+            investor quality, stage velocity (vs observed round cadence), and distribution breadth
+            (verified channel mix, QC weighted highest). Branded search and earned affinity are
+            estimated from public sources. Bootstrapped brands score 0 on investor signals -
+            intentional. Sliders go to 0: zero a signal to drop it from the score entirely.
             Data as of May 2026.
           </p>
         </aside>

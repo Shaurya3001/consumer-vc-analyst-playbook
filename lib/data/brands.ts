@@ -36,7 +36,7 @@ export interface Brand {
   sources: string[];
 }
 
-// 30 real emerging Indian consumer brands with verified signal data.
+// 73 real Indian consumer brands (funded and bootstrapped) with signal data.
 // Signals are estimates compiled from public sources (Google Trends India-geo,
 // Meta Ads Library, LinkedIn public profiles, press coverage).
 // dataAsOf marks the snapshot date. Sector/GTM/tier are taxonomy classifications (derived).

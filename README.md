@@ -20,7 +20,7 @@ Next.js 14 (App Router) + a typed static data layer + a daily Claude-powered ref
 | **Graduation Funnel** | `/applets/graduation-funnel` | What % of seed brands reach Series A/B? Cohort base rates by sector. |
 | **Unit Economics Sandbox** | `/applets/unit-economics` | Do the unit economics work? Live LTV/CAC + payback with editable inputs and category benchmarks. |
 | **Exits & Acquisitions Tracker** | `/applets/exits-tracker` | How do consumer VCs actually exit? FMCG M&A leaderboard (HUL, ITC, Marico, Emami). |
-| **Research & Reports** | `/applets/research` | What do the canonical reports say? Bain, Redseer, Fireside, McKinsey, BCG, PwC — headline figures, parsed and cited. |
+| **Research & Reports** | `/applets/research` | What do the canonical reports say? 20 reports with parsed figures, plus a chat that answers from the corpus (bring your own Claude key). |
 
 Each applet leads with a measured **"The read"** takeaway (the investor "so what") before the data.
 
@@ -50,12 +50,12 @@ lib/
   data/
     taxonomy.ts                The MECE spine: 11 sectors × 6 GTM tags × 5 income tiers
     funding-rounds.ts          160+ verified rounds (merges auto-rounds.json)
-    brands.ts                  30 emerging brands with momentum signals
-    investors.ts               29 India consumer VCs
+    brands.ts                  73 brands across all 11 sectors (funded + bootstrapped)
+    investors.ts               89 India consumer investors (VC, PE, strategic, sovereign, angel)
     whitespace.ts              Sector × tier gap grid (derived + editorial)
     cohorts.ts                 Graduation-funnel base rates
     acquisitions.ts            FMCG M&A deals
-    reports.ts                 Industry-report registry (Bain, Redseer, Fireside, …)
+    reports.ts                 20-report registry (Bain, Redseer, Fireside, Blume, Bessemer, ...)
     market-context.ts          Macro stats, report-sourced
     unit-economics-defaults.ts Per-category benchmark inputs
     sources.ts                 Source URL registry

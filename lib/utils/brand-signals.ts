@@ -171,3 +171,34 @@ export function computeStageVelocityScore(
 // Co-investment centrality signal removed (user feedback, 2026-06): the lead
 // investor's network position is a syndicate property, not brand momentum.
 // The realized-affinity graph still powers the Investor Map via investor-affinity.ts.
+
+// ── Distribution breadth: computed from the brand's verified GTM channel mix. ─
+// Channel weights reflect 2026 reality: quick-commerce presence is the strongest
+// distribution signal in Indian consumer (Redseer: q-comm is the fastest-growing
+// format; BPC on q-comm grew ~22.5x CY22-25), marketplaces and omnichannel next,
+// GT reach matters for mass brands, own-site D2C is table stakes.
+import type { GtmModel } from "@/lib/data/taxonomy";
+
+const CHANNEL_WEIGHTS: Record<GtmModel, number> = {
+  "QC-native": 35,
+  "Marketplace-led": 20,
+  "Omnichannel": 20,
+  "General Trade": 15,
+  "Platform": 10,
+  "D2C-first": 10,
+};
+
+export function computeDistributionBreadthScore(
+  gtmModels: GtmModel[],
+): ComputedSignal {
+  if (!gtmModels || gtmModels.length === 0) {
+    return { score: 0, derivation: "No verified sales channels in dataset" };
+  }
+  const raw = gtmModels.reduce((s, g) => s + (CHANNEL_WEIGHTS[g] ?? 0), 0);
+  const score = Math.min(100, raw);
+  const parts = gtmModels.map((g) => `${g} +${CHANNEL_WEIGHTS[g] ?? 0}`).join(", ");
+  return {
+    score,
+    derivation: `${gtmModels.length} verified channel${gtmModels.length === 1 ? "" : "s"}: ${parts} (QC weighted highest - the 2026 distribution signal)`,
+  };
+}
