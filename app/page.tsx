@@ -4,7 +4,7 @@ const APPLETS = [
   {
     slug: "funding-explorer",
     title: "Funding Rounds Explorer",
-    description: "85+ real rounds (2019-2026) - filter by sector, GTM model, income tier, stage, city, investor. Every row links to source.",
+    description: "160+ real rounds (2019-2026) - filter by sector, GTM model, income tier, stage, city, investor. Every row links to source.",
     icon: "💰",
   },
   {
@@ -49,7 +49,7 @@ const APPLETS = [
   {
     slug: "research",
     title: "Research & Reports",
-    description: "The canonical India consumer reports - Bain, Redseer, Fireside, McKinsey, BCG, PwC - with headline figures and source links.",
+    description: "20 canonical India consumer reports - Bain, Redseer, Fireside, Blume, Bessemer, Deloitte and more - with parsed figures, source links, and a chat that answers from the corpus (bring your own Claude key).",
     icon: "📚",
   },
 ];
