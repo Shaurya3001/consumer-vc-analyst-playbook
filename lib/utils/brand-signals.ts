@@ -2,7 +2,6 @@ import { INVESTORS } from "@/lib/data/investors";
 import type { Stage } from "@/lib/data/taxonomy";
 import { FUNDING_ROUNDS } from "@/lib/data/funding-rounds";
 import { roundCadence } from "@/lib/utils/funding-analytics";
-import { rankCounterparts } from "@/lib/utils/investor-affinity";
 import type { Investor } from "@/lib/data/investors";
 import {
   REFERENCE_MONTH,
@@ -11,7 +10,6 @@ import {
   STAGE_VELOCITY_NEUTRAL,
   SEED_FUND_THESIS_BONUS,
   INVESTOR_UNKNOWN_DEFAULT,
-  CENTRALITY_UNKNOWN_DEFAULT,
   STAGE_LADDER,
   AUM_QUALITY_TIERS,
   NULL_AUM_BASE_BY_TYPE,
@@ -170,51 +168,6 @@ export function computeStageVelocityScore(
   return { score, derivation };
 }
 
-// ── Co-investment centrality: precompute every investor's realized-affinity
-// degree once, then normalise so the most-networked investor scores ~100. ─────
-const CENTRALITY_BY_ID: Map<string, { raw: number; links: number }> = (() => {
-  const map = new Map<string, { raw: number; links: number }>();
-  for (const inv of INVESTORS) {
-    const counterparts = rankCounterparts(inv.id);
-    let raw = 0;
-    let links = 0;
-    for (const c of counterparts) {
-      raw += c.affinity.realizedScore;
-      if (c.affinity.realizedScore >= 0.1) links += 1;
-    }
-    map.set(inv.id, { raw, links });
-  }
-  return map;
-})();
-
-const MAX_CENTRALITY = Math.max(
-  1,
-  ...Array.from(CENTRALITY_BY_ID.values()).map((v) => v.raw),
-);
-
-/**
- * Co-investment centrality — how networked the lead investor's cap table is.
- * Reuses the realized-affinity graph from investor-affinity.ts: a lead that
- * co-invests widely signals strong syndicate access and follow-on optionality.
- * Bootstrapped → 0. Lead not in dataset → neutral 25.
- */
-export function computeCoInvestmentCentralityScore(
-  leadInvestorName: string | undefined,
-): ComputedSignal {
-  if (!leadInvestorName) {
-    return { score: 0, derivation: "No institutional investor - bootstrapped" };
-  }
-  const match = findInvestorByName(leadInvestorName);
-  if (!match) {
-    return {
-      score: CENTRALITY_UNKNOWN_DEFAULT,
-      derivation: `${leadInvestorName} · not in network dataset (default ${CENTRALITY_UNKNOWN_DEFAULT})`,
-    };
-  }
-  const entry = CENTRALITY_BY_ID.get(match.id) ?? { raw: 0, links: 0 };
-  const score = Math.max(5, Math.round((entry.raw / MAX_CENTRALITY) * 100));
-  return {
-    score,
-    derivation: `${match.name} · ${entry.links} realized co-investment link${entry.links === 1 ? "" : "s"} · centrality ${score}/100`,
-  };
-}
+// Co-investment centrality signal removed (user feedback, 2026-06): the lead
+// investor's network position is a syndicate property, not brand momentum.
+// The realized-affinity graph still powers the Investor Map via investor-affinity.ts.

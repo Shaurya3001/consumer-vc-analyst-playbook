@@ -5,7 +5,6 @@ import {
   computeFundingRecencyScore,
   computeInvestorQualityScore,
   computeStageVelocityScore,
-  computeCoInvestmentCentralityScore,
 } from "./brand-signals";
 
 export interface SignalDetail {
@@ -22,7 +21,6 @@ export interface MomentumResult {
     fundingRecency: SignalDetail;
     investorQuality: SignalDetail;
     stageVelocity: SignalDetail;
-    coInvestmentCentrality: SignalDetail;
   };
   confidence: "high" | "medium" | "low";
 }
@@ -34,7 +32,6 @@ export function computeMomentumScore(
   const recency = computeFundingRecencyScore(brand.lastRound?.date);
   const investorQ = computeInvestorQualityScore(brand.lastRound?.leadInvestor);
   const velocity = computeStageVelocityScore(brand.founded, brand.stage, brand.lastRound?.date);
-  const centrality = computeCoInvestmentCentralityScore(brand.lastRound?.leadInvestor);
 
   const components: MomentumResult["components"] = {
     brandedSearch: {
@@ -62,11 +59,6 @@ export function computeMomentumScore(
       type: "computed",
       derivation: velocity.derivation,
     },
-    coInvestmentCentrality: {
-      value: centrality.score,
-      type: "computed",
-      derivation: centrality.derivation,
-    },
   };
 
   const totalWeight =
@@ -74,16 +66,14 @@ export function computeMomentumScore(
     weights.earnedAffinityScore +
     weights.fundingRecencyScore +
     weights.investorQualityScore +
-    weights.stageVelocityScore +
-    weights.coInvestmentCentralityScore;
+    weights.stageVelocityScore;
 
   const weighted =
     (components.brandedSearch.value * weights.brandedSearchScore +
       components.earnedAffinity.value * weights.earnedAffinityScore +
       components.fundingRecency.value * weights.fundingRecencyScore +
       components.investorQuality.value * weights.investorQualityScore +
-      components.stageVelocity.value * weights.stageVelocityScore +
-      components.coInvestmentCentrality.value * weights.coInvestmentCentralityScore) /
+      components.stageVelocity.value * weights.stageVelocityScore) /
     totalWeight;
 
   // Confidence based on estimated signals having meaningful values (computed signals always present)

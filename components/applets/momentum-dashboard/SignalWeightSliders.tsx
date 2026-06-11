@@ -49,13 +49,6 @@ const SIGNAL_META: {
     color: "bg-cyan-500",
     computed: true,
   },
-  {
-    key: "coInvestmentCentralityScore",
-    label: "Co-investment Reach",
-    description: "Lead investor's syndicate centrality - computed from affinity graph",
-    color: "bg-fuchsia-500",
-    computed: true,
-  },
 ];
 
 const KEYS = SIGNAL_META.map((s) => s.key);

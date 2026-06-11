@@ -57,15 +57,16 @@ export const INDIA_TIERS = {
 export type IndiaTier = keyof typeof INDIA_TIERS;
 
 // Momentum signal weights (default - user can re-weight via sliders)
-// 4 computed (recency, investor quality, stage velocity, co-investment centrality)
+// 3 computed (funding recency, investor quality, stage velocity)
 // + 2 estimated (branded search, earned affinity).
+// Co-investment centrality was removed (user feedback: network position of the
+// lead investor is not a brand-momentum signal).
 export const DEFAULT_SIGNAL_WEIGHTS = {
   brandedSearchScore: 20,
   earnedAffinityScore: 15,
-  fundingRecencyScore: 20,
-  investorQualityScore: 20,
+  fundingRecencyScore: 25,
+  investorQualityScore: 25,
   stageVelocityScore: 15,
-  coInvestmentCentralityScore: 10,
 } as const;
 
 export type SignalWeights = {
@@ -74,5 +75,4 @@ export type SignalWeights = {
   fundingRecencyScore: number;
   investorQualityScore: number;
   stageVelocityScore: number;
-  coInvestmentCentralityScore: number;
 };

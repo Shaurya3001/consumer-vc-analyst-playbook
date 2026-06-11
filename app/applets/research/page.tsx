@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { INDUSTRY_REPORTS, AUTHOR_TYPE_LABEL, REPORT_TAKEAWAY, type ReportAuthorType } from "@/lib/data/reports";
 import { MACRO_CONSUMPTION } from "@/lib/data/market-context";
+import ReportChat from "@/components/applets/research/ReportChat";
 
 const TYPE_STYLES: Record<ReportAuthorType, string> = {
   consulting: "bg-blue-950 text-blue-300 border-blue-800",
@@ -54,6 +55,11 @@ export default function ResearchPage() {
               <p className="text-[10px] text-indigo-400 mt-1.5">{s.asOf}</p>
             </a>
           ))}
+        </div>
+
+        {/* Chat with the reports */}
+        <div className="mb-10">
+          <ReportChat />
         </div>
 
         {/* Reports list */}

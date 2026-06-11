@@ -13,7 +13,6 @@ export const RECENCY_BOOTSTRAPPED_NEUTRAL = 50;
 export const STAGE_VELOCITY_NEUTRAL = 50;
 export const SEED_FUND_THESIS_BONUS = 5;
 export const INVESTOR_UNKNOWN_DEFAULT = 30;
-export const CENTRALITY_UNKNOWN_DEFAULT = 25;
 
 /** Stage ladder index - founding is stage 0, each round climbs one rung. */
 export const STAGE_LADDER: Record<Stage, number> = {
@@ -151,16 +150,8 @@ export const SIGNALS: SignalSpec[] = [
     source: "Computed from founded year, current stage, and the round-cadence base rate of the real funding dataset.",
     bootstrapped: `No rounds -> velocity not measurable -> neutral ${STAGE_VELOCITY_NEUTRAL}.`,
   },
-  {
-    key: "coInvestmentCentrality",
-    label: "Co-investment Reach",
-    kind: "computed",
-    weightKey: "coInvestmentCentralityScore",
-    accent: "text-fuchsia-400",
-    bar: "bg-fuchsia-500",
-    measures: "How networked the lead investor's syndicate is - a proxy for follow-on optionality.",
-    formula: `The lead investor's realised co-investment affinity summed across all other funds, normalised so the most-networked investor is ~100. A lead not in the DB -> ${CENTRALITY_UNKNOWN_DEFAULT}.`,
-    source: "Computed from the investor co-investment (affinity) graph.",
-    bootstrapped: "No institutional investor -> 0.",
-  },
 ];
+
+// Co-investment centrality was removed from the momentum score (2026-06, user
+// feedback): the lead investor's network position is a syndicate property, not
+// a brand-momentum signal. The affinity graph still powers the Investor Map.

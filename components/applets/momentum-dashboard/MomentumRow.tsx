@@ -31,7 +31,6 @@ const SIGNAL_BARS = [
   { key: "fundingRecency" as const, label: "Recency", color: "bg-emerald-500", computed: true },
   { key: "investorQuality" as const, label: "Investor", color: "bg-rose-500", computed: true },
   { key: "stageVelocity" as const, label: "Velocity", color: "bg-cyan-500", computed: true },
-  { key: "coInvestmentCentrality" as const, label: "Co-invest", color: "bg-fuchsia-500", computed: true },
 ];
 
 const SCORE_BG = (score: number) => {
