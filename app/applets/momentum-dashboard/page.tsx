@@ -89,7 +89,7 @@ export default function MomentumDashboardPage() {
             </div>
             <h1 className="text-xl font-bold">Momentum Dashboard</h1>
             <p className="text-zinc-500 text-xs mt-0.5">
-              73 brands across all 11 consumer sectors - funded and bootstrapped scouting targets.
+              {BRANDS.length} brands across all 11 consumer sectors - funded and bootstrapped scouting targets.
               4 signals computed from data (funding recency, investor quality, stage velocity, distribution breadth);
               2 estimated. Re-weight to reflect your thesis.{" "}
               <Link href="/methodology" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">

@@ -14,7 +14,7 @@ Next.js 14 (App Router) + a typed static data layer + a daily Claude-powered ref
 | Applet | Route | The question it answers |
 |---|---|---|
 | **Funding Rounds Explorer** | `/applets/funding-explorer` | Where is capital concentrated vs. thin? Filter 160+ real rounds by sector × GTM × tier × stage × city × investor, with a live-computed concentration read and round-cadence base rates. |
-| **Momentum Dashboard** | `/applets/momentum-dashboard` | Which emerging brands are growing — and is it bought or earned? Re-weightable composite score with signal decomposition. |
+| **Momentum Dashboard** | `/applets/momentum-dashboard` | Which emerging brands are growing — and is it bought or earned? 175 brands, re-weightable composite score with signal decomposition. |
 | **Category White-space Map** | `/applets/whitespace-map` | Where are the under-funded gaps? Sector × income-tier heatmap with report-sourced market backdrop. |
 | **Investor Activity Map** | `/applets/investor-map` | Who co-invests with whom? Anchor a fund → Natural Ally / Untapped Fit / Parallel Player bands + affinity matrix. |
 | **Graduation Funnel** | `/applets/graduation-funnel` | What % of seed brands reach Series A/B? Cohort base rates by sector. |
@@ -50,8 +50,8 @@ lib/
   data/
     taxonomy.ts                The MECE spine: 11 sectors × 6 GTM tags × 5 income tiers
     funding-rounds.ts          160+ verified rounds (merges auto-rounds.json)
-    brands.ts                  73 brands across all 11 sectors (funded + bootstrapped)
-    investors.ts               89 India consumer investors (VC, PE, strategic, sovereign, angel)
+    brands.ts                  175 brands across all 11 sectors (funded + bootstrapped)
+    investors.ts               89 India consumer investors (VC, PE, strategic, sovereign, angel; merges auto-investors.json)
     whitespace.ts              Sector × tier gap grid (derived + editorial)
     cohorts.ts                 Graduation-funnel base rates
     acquisitions.ts            FMCG M&A deals
@@ -61,6 +61,7 @@ lib/
     sources.ts                 Source URL registry
     site-meta.json             lastUpdated / lastChecked — bumped by the cron
     auto-rounds.json           Daily-detected rounds (starts empty, tagged "new")
+    auto-investors.json        Daily-detected new consumer funds (starts empty, tagged "new")
     covered-companies.json     Dedupe list for the cron
   utils/
     momentum-score.ts          Composite + LTV helpers
@@ -98,7 +99,12 @@ The repo is connected to Vercel — **every push to `main` auto-deploys**. No bu
 
 ## Daily data refresh (09:00 IST)
 
-A GitHub Action checks daily for newly-announced India consumer rounds, validates each against a real source URL, dedupes, appends verified ones to `lib/data/auto-rounds.json` (surfaced with a "new" tag in the Funding Explorer), and bumps the timestamp the homepage countdown reads.
+A GitHub Action actively sources two things daily:
+
+1. **Deals** — India consumer rounds announced in the last **21 days** (wide enough to backfill anything a single daily check missed), validated against a real source URL, deduped by company + month against every round already on the site — so a follow-on round by an existing company is correctly treated as new — and appended to `lib/data/auto-rounds.json` (surfaced with a "new" tag in the Funding Explorer).
+2. **Funds** — newly launched India consumer-focused funds (new vehicles, first closes, debut micro-VCs) from the last 30 days, deduped by name and appended to `lib/data/auto-investors.json` (surfaced with a "new" tag in the Investor Activity Map, with neutral defaults until manually curated).
+
+It also bumps the timestamp the homepage countdown reads.
 
 **To enable the data-fetching half** (the cron runs regardless and keeps the timestamp honest, but only adds rounds with an API key):
 

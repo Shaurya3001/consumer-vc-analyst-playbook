@@ -85,3 +85,9 @@
 - Daily cron needs `ANTHROPIC_API_KEY` repo secret (user adds it). Without it the cron just bumps the timestamp — non-fatal.
 - All copy uses plain hyphens; no em/en dashes (a node script in history did the sweep — keep it that way).
 </content>
+
+## DONE (2026-06-12) - Active daily sourcing + 175-brand momentum coverage
+1. Daily pipeline upgraded (`scripts/daily-update.mjs`): deals lookback 7d -> 21d (backfills misses); dedupe FIXED from company-existence (which silently dropped every follow-on round by a covered company) to company+month with a 3-month proximity window parsed live from funding-rounds.ts; second Claude call sources NEW India consumer funds (30d) -> `auto-investors.json` -> merged into INVESTORS with neutral defaults + "new" chip in InvestorCard. Workflow commits the new feed.
+2. BLOCKER (user action): no ANTHROPIC_API_KEY secret in the repo - cron runs 12-19s timestamp-only since Jun 5. Sourcing activates the moment the secret lands.
+3. Momentum brands 73 -> 175: every consumer company in the 164-round dataset now has a brand entry (derived from its verified round; founded years individually known/web-verified; ~25 verified via search this session). Excluded: Honasa (listed), Captain Fresh/GoKwik/Zypp (B2B). Counts updated (momentum header now dynamic BRANDS.length, home card, README).
+4. Verified: tsc clean; preview renders 175 rows; GIVA expanded row shows all 6 signal derivations correct; console clean on fresh reload (676 accumulated errors were dev-HMR noise, confirmed identical pre/post reload).

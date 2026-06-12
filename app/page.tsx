@@ -10,7 +10,7 @@ const APPLETS = [
   {
     slug: "momentum-dashboard",
     title: "Momentum Dashboard",
-    description: "73 brands across all 11 consumer sectors - funded and bootstrapped. Re-weightable score with computed signals (funding recency, investor quality) and full derivation trace.",
+    description: "175 brands across all 11 consumer sectors - funded and bootstrapped. Re-weightable score with computed signals (funding recency, investor quality) and full derivation trace.",
     icon: "🚀",
   },
   {
@@ -18,21 +18,18 @@ const APPLETS = [
     title: "Category White-space Map",
     description: "Sector × income-tier heatmap showing funding density vs. market gaps.",
     icon: "🗺️",
-    status: "soon",
   },
   {
     slug: "investor-map",
     title: "Investor Activity Map",
-    description: "Who's writing consumer checks, at what stage, and with whom.",
+    description: "89 India consumer investors - who writes checks at what stage, and which funds naturally syndicate (plus daily auto-detected new funds).",
     icon: "🤝",
-    status: "soon",
   },
   {
     slug: "graduation-funnel",
     title: "Graduation Funnel",
-    description: "Of brands that raised Seed in year N, what % reached Series A/B? By sector.",
+    description: "Of brands that raised Seed in year N, what % reached Series A/B? By sector, validated against observed round-cadence base rates.",
     icon: "📊",
-    status: "soon",
   },
   {
     slug: "unit-economics",
