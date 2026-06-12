@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Brand } from "@/lib/data/brands";
 import type { MomentumResult } from "@/lib/utils/momentum-score";
-import { metaAdLibraryUrl } from "@/lib/utils/ad-links";
+import { metaAdLibraryUrl, googleNewsUrl } from "@/lib/utils/ad-links";
 
 interface MomentumRowProps {
   brand: Brand;
@@ -229,6 +229,16 @@ export default function MomentumRow({ brand, rank, result }: MomentumRowProps) {
                   aria-label={`Live Meta Ad Library search for ${brand.name}`}
                 >
                   live ads (Meta Ad Library)
+                </a>{" "}
+                ·{" "}
+                <a
+                  href={googleNewsUrl(brand.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+                  aria-label={`Live press coverage for ${brand.name} on Google News`}
+                >
+                  live press (Google News)
                 </a>
               </p>
             </div>

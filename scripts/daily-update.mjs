@@ -148,7 +148,12 @@ function isValidRound(r, knownRounds, existingKeys) {
 
 const ROUNDS_PROMPT = `You are a precise data extraction agent for an Indian consumer-VC intelligence site.
 
-Find direct-to-consumer / consumer brand funding rounds in INDIA that were ANNOUNCED IN THE LAST 21 DAYS. Use web search against Inc42, Entrackr, YourStory, Business Standard, Economic Times, VCCircle. Include follow-on rounds by companies that have raised before - those matter most.
+Find direct-to-consumer / consumer brand funding rounds in INDIA that were ANNOUNCED IN THE LAST 21 DAYS. Use web search against:
+- Startup trade press: Inc42, Entrackr, YourStory, VCCircle, IndianStartupNews, The CapTable
+- Business dailies: Economic Times, Business Standard, Mint, Moneycontrol, Financial Express, The Hindu BusinessLine
+- Press-release wires and PR-carried coverage: PR Newswire, Business Wire India, ANI/PTI wire stories (often carried by Business Standard and ThePrint) - company and investor press releases are valid primary sources
+- Trade/category media: Indian Retailer, India Retailing, FashionNetwork India, BW Disrupt, Outlook Business
+Include follow-on rounds by companies that have raised before - those matter most.
 
 Return ONLY a JSON array (no prose). Each object:
 {
@@ -178,7 +183,7 @@ function isValidFund(f, knownNames, existingNames) {
 
 const FUNDS_PROMPT = `You are a precise data extraction agent for an Indian consumer-VC intelligence site.
 
-Find NEWLY ANNOUNCED India-focused funds that invest in CONSUMER startups (consumer brands, D2C, food, beauty, fashion, consumer internet) from the LAST 30 DAYS: new fund launches, first or final closes of new vehicles, debut micro-VCs or angel funds with a consumer thesis. Use web search against Inc42, Entrackr, YourStory, Economic Times, VCCircle, Moneycontrol.
+Find NEWLY ANNOUNCED India-focused funds that invest in CONSUMER startups (consumer brands, D2C, food, beauty, fashion, consumer internet) from the LAST 30 DAYS: new fund launches, first or final closes of new vehicles, debut micro-VCs or angel funds with a consumer thesis. Use web search against Inc42, Entrackr, YourStory, Economic Times, VCCircle, Moneycontrol, Mint, Business Standard, and press-release wires (PR Newswire, Business Wire India, ANI/PTI) - fund-launch press releases are valid primary sources.
 
 Return ONLY a JSON array (no prose). Each object:
 {

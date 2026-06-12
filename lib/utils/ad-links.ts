@@ -15,3 +15,10 @@ export function metaAdLibraryUrl(brandName: string): string {
   const q = encodeURIComponent(brandName);
   return `https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=IN&q=${q}&search_type=keyword_unordered&media_type=all`;
 }
+
+// Google News (India edition) keyword search - latest press coverage and
+// wire-carried press releases for the brand, checked live by the reader.
+export function googleNewsUrl(brandName: string): string {
+  const q = encodeURIComponent(`"${brandName}"`);
+  return `https://news.google.com/search?q=${q}&hl=en-IN&gl=IN&ceid=IN:en`;
+}

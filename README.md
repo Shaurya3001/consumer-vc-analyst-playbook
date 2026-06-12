@@ -101,7 +101,7 @@ The repo is connected to Vercel — **every push to `main` auto-deploys**. No bu
 
 A GitHub Action actively sources two things daily:
 
-1. **Deals** — India consumer rounds announced in the last **21 days** (wide enough to backfill anything a single daily check missed), validated against a real source URL, deduped by company + month against every round already on the site — so a follow-on round by an existing company is correctly treated as new — and appended to `lib/data/auto-rounds.json` (surfaced with a "new" tag in the Funding Explorer).
+1. **Deals** — India consumer rounds announced in the last **21 days** (wide enough to backfill anything a single daily check missed), sourced from startup trade press, business dailies, and press-release wires (PR Newswire, Business Wire India, ANI/PTI), validated against a real source URL, deduped by company + month against every round already on the site — so a follow-on round by an existing company is correctly treated as new — and appended to `lib/data/auto-rounds.json` (surfaced with a "new" tag in the Funding Explorer).
 2. **Funds** — newly launched India consumer-focused funds (new vehicles, first closes, debut micro-VCs) from the last 30 days, deduped by name and appended to `lib/data/auto-investors.json` (surfaced with a "new" tag in the Investor Activity Map, with neutral defaults until manually curated).
 
 It also bumps the timestamp the homepage countdown reads.
