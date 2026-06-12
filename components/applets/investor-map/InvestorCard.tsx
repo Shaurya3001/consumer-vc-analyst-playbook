@@ -48,8 +48,18 @@ export default function InvestorCard({ investor, isAnchor, onSelect }: InvestorC
     >
       <div className="flex items-start justify-between gap-2 mb-2">
         <h3 className="text-sm font-semibold text-zinc-100 leading-tight">{investor.name}</h3>
-        <span className={`text-xs px-2 py-0.5 rounded-full border shrink-0 ${TYPE_COLORS[investor.type]}`}>
-          {TYPE_LABELS[investor.type]}
+        <span className="flex items-center gap-1 shrink-0">
+          {investor.autoDetected && (
+            <span
+              className="text-[10px] px-1.5 py-0.5 rounded-full border bg-emerald-950 border-emerald-700 text-emerald-400 font-mono"
+              title="Auto-detected by the daily sourcing job, pending curation"
+            >
+              new
+            </span>
+          )}
+          <span className={`text-xs px-2 py-0.5 rounded-full border ${TYPE_COLORS[investor.type]}`}>
+            {TYPE_LABELS[investor.type]}
+          </span>
         </span>
       </div>
 

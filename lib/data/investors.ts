@@ -1,4 +1,5 @@
 import type { Sector, Stage } from "./taxonomy";
+import AUTO_INVESTOR_FEED from "./auto-investors.json";
 
 export interface Investor {
   id: string;
@@ -23,6 +24,7 @@ export interface Investor {
   coInvestorAffinity: string[];  // reputed frequent co-investors (used to enrich the matrix)
   notes: string;
   sources: string[];             // direct URLs
+  autoDetected?: boolean;        // true = found by the daily sourcing job, pending curation
 }
 
 // 74 verified India consumer investors - June 2026 data.
@@ -33,7 +35,7 @@ export interface Investor {
 // Szymkiewicz-Simpson overlap coefficient = |A∩B| / min(|A|,|B|)
 // is computed from this. Sets are deliberately curated subsets (not exhaustive
 // portfolios) - overlap coefficient is robust to that truncation.
-export const INVESTORS: Investor[] = [
+const STATIC_INVESTORS: Investor[] = [
 
   // ── Tier 1: Dedicated consumer funds ─────────────────────────────────────
 
@@ -1490,3 +1492,43 @@ export const INVESTORS: Investor[] = [
     sources: ["https://yourstory.com/2026/05/yes-madam-raises-rs-50-cr-from-info-edge-growth-fund"],
   },
 ];
+
+// ── Auto-detected funds from the daily sourcing job (auto-investors.json) ────
+// Conservative mapping: unknown fields get neutral defaults; recentBets stays
+// empty so a new fund never fabricates affinity-graph overlap. Entries carry
+// autoDetected so the UI labels them "new" until manually curated into the
+// static list above.
+
+interface AutoInvestor {
+  name: string;
+  type: Investor["type"];
+  corpusUsdMn: number | null;
+  stageFocus: string;
+  thesis: string;
+  sources: string[];
+  autoDetected: boolean;
+  addedISO: string;
+}
+
+const slugify = (s: string) =>
+  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+const AUTO_INVESTORS: Investor[] = (AUTO_INVESTOR_FEED as AutoInvestor[]).map((f) => ({
+  id: `auto-${slugify(f.name)}`,
+  name: f.name,
+  type: f.type,
+  primaryStages: ["Seed", "Series A"],
+  activeSectors: [],
+  checkSizeMin: 0.5,
+  checkSizeMax: 5,
+  aumUsdMn: f.corpusUsdMn,
+  recentBets: [],
+  coInvestorAffinity: [],
+  notes: [f.thesis, f.stageFocus && `Stage focus: ${f.stageFocus}.`, `Auto-detected ${f.addedISO.slice(0, 10)}, pending curation.`]
+    .filter(Boolean)
+    .join(" "),
+  sources: f.sources,
+  autoDetected: true,
+}));
+
+export const INVESTORS: Investor[] = [...AUTO_INVESTORS, ...STATIC_INVESTORS];
