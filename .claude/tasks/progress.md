@@ -77,6 +77,16 @@
 - DELIBERATELY did NOT derive cohorts from the brand list (winner-biased) - kept modeled/indicative per the Session B survivorship finding. FinTech/Internet modeled to graduate slightly higher in 2019-21, cut harder post-2022 (RBI digital-lending tightening) - matches India funding history.
 - Verified: funnel total 612 -> 1151 seed rounds; aggregate seed->A holds at 27% (315/1151), confirming methodology consistency; 11 bars render with correct live tooltips; tsc + next build clean; deploy green; live HTML confirmed (contains 1151, not 612). Commit b2353f9.
 
+## 2026-06-17 — Full data refresh pass ("refresh every applet")
+
+### Actions
+- Two background research agents (macro stats + net-new funding). Most datasets already current this session (investors 74, exits 22, cohorts 11 sectors, reports Bain IVC 2026, whitespace) - confirmed, not re-churned.
+- market-context.ts refreshed: Blinkit >50%->~46%, Zepto ~29%->~22% + public DRHP 9 Jun 2026 (superseded "confidential Dec 2025"), QC GMV "$10B+ now", BPC $28B->$40B by 2030; added Swiggy Instamart, QC ad-spend ₹4,000 Cr, Premiumisation. (commit cc0e60c)
+- Research page: QUICK_COMMERCE/D2C/BPC stat arrays were DEAD DATA (defined, never rendered) - added a "Channel & category snapshot" section so they render.
+- funding-rounds.ts: +9 net-new verified 2026 rounds (Palmonas, Yoho, Gimi Michi, Rotoris, Cava, MyDesignation, DrinkPrime, Peping, Cookie Cartel). Skipped Sleepy Owl (already tracked) + Nothing But/Jhatak (undisclosed amounts - no fabrication). Cascades to Funding Explorer, white-space examples, funnel/momentum base rates. (commit 19265a8)
+- GIT: remote had 3 automated daily-refresh commits (Jun 15/16/17 cron) - rebased my 2 commits on top cleanly, rebuilt on merged state, pushed (3e7ae1f). Deploy green; live verified (Palmonas + Premiumisation present).
+- NOT done: did not add the 9 new companies as momentum BRANDS (would require inventing 8 signal scores each - fabrication risk). Funding rounds added; brands deferred.
+
 ## 2026-06-06 — Scoring methodology page (commit 71f7381)
 
 ### Actions
