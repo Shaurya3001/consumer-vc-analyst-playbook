@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { INDUSTRY_REPORTS, AUTHOR_TYPE_LABEL, REPORT_TAKEAWAY, type ReportAuthorType } from "@/lib/data/reports";
-import { MACRO_CONSUMPTION } from "@/lib/data/market-context";
+import { MACRO_CONSUMPTION, QUICK_COMMERCE, D2C_MARKET, BPC_MARKET, type MarketStat } from "@/lib/data/market-context";
 import ReportChat from "@/components/applets/research/ReportChat";
 
 const TYPE_STYLES: Record<ReportAuthorType, string> = {
@@ -13,6 +13,30 @@ const TYPE_STYLES: Record<ReportAuthorType, string> = {
 
 function hostOf(url: string): string {
   try { return new URL(url).hostname.replace("www.", ""); } catch { return "source"; }
+}
+
+function StatGroup({ title, stats }: { title: string; stats: MarketStat[] }) {
+  return (
+    <div>
+      <p className="text-xs text-zinc-500 uppercase tracking-wider mb-2">{title}</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {stats.map((s) => (
+          <a
+            key={s.label}
+            href={s.source}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block border border-zinc-800 bg-zinc-900/60 rounded-xl p-4 hover:border-zinc-600 transition-colors"
+          >
+            <p className="text-lg font-bold text-zinc-100 tabular-nums">{s.value}</p>
+            <p className="text-xs text-zinc-300 mt-0.5">{s.label}</p>
+            <p className="text-[11px] text-zinc-500 mt-1 leading-snug line-clamp-3">{s.note}</p>
+            <p className="text-[10px] text-indigo-400 mt-1.5">{s.asOf}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default function ResearchPage() {
@@ -55,6 +79,14 @@ export default function ResearchPage() {
               <p className="text-[10px] text-indigo-400 mt-1.5">{s.asOf}</p>
             </a>
           ))}
+        </div>
+
+        {/* Channel & category snapshot */}
+        <h2 className="text-sm font-semibold text-zinc-200 mb-3">Channel &amp; category snapshot</h2>
+        <div className="space-y-6 mb-10">
+          <StatGroup title="Quick commerce" stats={QUICK_COMMERCE} />
+          <StatGroup title="D2C market" stats={D2C_MARKET} />
+          <StatGroup title="Beauty & personal care" stats={BPC_MARKET} />
         </div>
 
         {/* Chat with the reports */}

@@ -11,25 +11,32 @@ export interface MarketStat {
 
 export const QUICK_COMMERCE: MarketStat[] = [
   {
-    label: "Q-commerce market size (India)",
-    value: "$6.94B",
-    note: "2026 estimate; projected $10B+ by 2029 at 12.4% CAGR",
-    source: "https://www.grabon.in/indulge/tech/quick-commerce-statistics/",
-    asOf: "2026-Q1",
+    label: "India quick commerce GMV",
+    value: "$10B+",
+    note: "CY25 GMV; 30M+ monthly transacting users, ~15% of all e-commerce GMV; market value ~$13B by 2029",
+    source: "https://www.globenewswire.com/news-release/2026/04/20/3277255/28124/en/india-quick-commerce-report-2026-market-to-reach-12-97-billion-by-2029-blinkit-zepto-and-swiggy-instamart-lead-surge-as-jiomart-and-bigbasket-scale-competitive-entry.html",
+    asOf: "2026-04",
   },
   {
     label: "Blinkit market share",
-    value: ">50%",
-    note: "Q4 FY26: ₹13,232 Cr revenue (674% YoY); quarterly NOV ~₹18,000 Cr",
-    source: "https://quashbugs.com/blog/blinkit-surpasses-zomato-in-quick-commerce",
-    asOf: "2026-Q1",
+    value: "~46%",
+    note: "Category leader (early 2026); FY26 revenue ₹37,779 Cr; first-ever adj. EBITDA profit in Q4 FY26; 2,243 dark stores",
+    source: "https://www.thearcweb.com/article/blinkit-zomato-eternal-quick-commerce-Q4-results-food-delivery-IGbWzh0VOAzqIhIC",
+    asOf: "2026-05",
   },
   {
     label: "Zepto market share",
-    value: "~29%",
-    note: "Confidentially filed for $1.2B IPO (Dec 2025); valued at $7B",
-    source: "https://www.cnbc.com/2025/12/29/zepto-confidential-ipo-filing-india-quick-commerce-instamart-swiggy-blinkit.html",
-    asOf: "2025-12",
+    value: "~22%",
+    note: "FY26 revenue ₹22,623 Cr (2x YoY); filed updated public DRHP 9 Jun 2026 (₹8,010 Cr fresh issue); last priced at $7B (Oct 2025)",
+    source: "https://www.outlookbusiness.com/markets/ipo-bound-zepto-doubles-revenue-in-fy26-but-losses-reach-5905-cr",
+    asOf: "2026-06",
+  },
+  {
+    label: "Swiggy Instamart market share",
+    value: "~24%",
+    note: "#2 player early 2026; Q1 FY26 GOV +22% QoQ; widest EBITDA losses among the top three",
+    source: "https://inc42.com/buzz/quick-commerce-battle-blinkit-instamart-gain-market-share-in-q1/",
+    asOf: "2026-Q1",
   },
   {
     label: "D2C share on Q-commerce",
@@ -44,6 +51,13 @@ export const QUICK_COMMERCE: MarketStat[] = [
     note: "Commissions + delivery + storage + mandatory ads. 10-15% GMV on advertising alone.",
     source: "https://ecomdigest.in/marketplaces/quick-commerce-d2c-brands-cost-traps",
     asOf: "2025-Q4",
+  },
+  {
+    label: "Q-commerce ad spend (top 3)",
+    value: "₹4,000 Cr (2025)",
+    note: "Up 202% YoY from ₹1,325 Cr; projected ~₹6,000 Cr in 2026 - q-commerce is now a primary visibility channel for D2C.",
+    source: "https://inc42.com/features/brands-ecommerce-platform-fees-d2c-margins-shrinking/",
+    asOf: "2026",
   },
 ];
 
@@ -87,10 +101,17 @@ export const D2C_MARKET: MarketStat[] = [
 
 export const BPC_MARKET: MarketStat[] = [
   {
-    label: "India BPC market size (2026)",
-    value: "$28B+",
-    note: "Projected to reach $28B+ by 2030; growing at ~12% CAGR",
-    source: "https://inc42.com/features/the-beauty-and-the-brand-decoding-the-28-bn-beauty-personal-care-opportunity-for-d2c-brands/",
+    label: "India BPC market size",
+    value: "$34B → $40B by 2030",
+    note: "$34B in 2025; India on track to become the world's #4 beauty market by 2030 (Redseer). D2C BPC alone ~$5.6B in 2026, growing ~37% CAGR.",
+    source: "https://redseer.com/articles/beauty-blitz-2030-mapping-indias-ascent-to-a-40-billion-powerhouse/",
+    asOf: "2026",
+  },
+  {
+    label: "BPC consolidation pipeline (2026)",
+    value: "L'Oréal in talks for Innovist",
+    note: "Reported ~$350-450M; signals FMCG/global majors continuing to buy Indian digital-first beauty rather than build it.",
+    source: "https://techstory.in/loreal-eyes-big-bet-on-indias-d2c-boom-with-innovist-deal/",
     asOf: "2026",
   },
   {
@@ -134,10 +155,10 @@ export const MACRO_CONSUMPTION: MarketStat[] = [
   },
   {
     label: "Quick commerce GMV by 2030",
-    value: "$25B+",
-    note: "From $10B+ today; 30-33M monthly users across 150+ cities and 5,000+ dark stores. BPC on q-comm grew ~22.5x CY22-CY25.",
-    source: "https://redseer.com/reports/reinventing-packaged-fb-with-quick-commerce/",
-    asOf: "2025 (Redseer)",
+    value: "$27-29B",
+    note: "From $10B+ today at a 40-45% GMV CAGR; 30-33M monthly users across 150+ cities and 5,000+ dark stores. BPC on q-comm grew ~22.5x CY22-CY25.",
+    source: "https://redseer.com/articles/how-indias-fastest-growing-channel-is-rewriting-packaged-fb-strategy/",
+    asOf: "2026 (Redseer)",
   },
   {
     label: "General trade share",
@@ -187,6 +208,13 @@ export const MACRO_CONSUMPTION: MarketStat[] = [
     note: "Against 1.1B internet users expected by 2030 (~70% smartphone penetration) - a deep runway for digital-first brands.",
     source: "https://firesideventures.com/pages/the-indian-consumer-report",
     asOf: "2025 (Fireside Ventures)",
+  },
+  {
+    label: "Premiumisation",
+    value: "27% of FMCG sales, 42% of value growth",
+    note: "Premium brands growing ~2x faster than mass-market (NielsenIQ); premiumisation is now a defining consumer-investment thesis.",
+    source: "https://inc42.com/resources/premiumisation-and-purpose-how-indian-consumers-redefined-retail-in-2025/",
+    asOf: "2026 (NielsenIQ)",
   },
 ];
 
