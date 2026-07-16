@@ -111,3 +111,14 @@
 - White-space map could get the same observed-vs-modeled treatment + the 5 new sectors
 - Momentum stage-velocity edge case: brand founded long ago + recent first raise reads as "slow" (flagged in Session A handoff)
 - cohorts.ts COHORT_YEARS still 2019-2024; could add 2025 vintage (near-zero graduation by mid-2026, low value)
+
+## 2026-07-16 — Monthly data refresh (mid-Jun → mid-Jul 2026)
+
+### Actions
+- Found root cause of a month of empty cron runs: ANTHROPIC_API_KEY secret never set on the GitHub repo — every daily run since launch was timestamp-only ("ANTHROPIC_API_KEY not set - skipping fetch"). Needs Shaurya to add the secret (repo → Settings → Secrets → Actions).
+- 3 parallel research agents (trade press / business dailies / new funds) swept 2026-06-10 → 2026-07-16; every candidate then independently re-verified against direct article URLs before inclusion.
+- funding-rounds.ts: +23 verified rounds (173 → 196). Headliners: CRED $900M Series H led by Meta (Kunal Shah → WhatsApp head), Vetic $40M (Bessemer), TruNativ $30M Series B (OrbiMed), AllHome ₹200 Cr Series B, The Indus Valley $17M Series B, Bodycraft ₹120 Cr Series A, Limelight ₹275 Cr promoter-led. Plus Manam, Rusk Media, SuperLiving, SaffronStays, Alienkind, Func. Lab, Capitalist Ventures, Xtovia, Supply6 (follow-on), Age Care Labs, Doodhvale (follow-on), Open Secret, BUILT, Promom, Anmasa. Uppercase ₹20 Cr internal round backfilled to 2026-04.
+- Excluded deliberately: Aukera ₹90 Cr (pure debt — no Debt stage in taxonomy), thumpN $3.75M + Onpoint $600K (HQ city undisclosed in all coverage), BCT Ventures (venture studio, not a brand).
+- auto-investors.json: +Atom XVII (₹75 Cr target consumer micro-VC, Harsh Kapadia) — renders with "new" tag. ConsumerX Ventures already curated in investors.ts.
+- Copy blast radius: "160+" → "195+" rounds in README (×2) + app/page.tsx; stale "50 real, verified" header comment in funding-rounds.ts fixed to 196; site-meta lastUpdated/lastChecked bumped.
+- Verified: tsc clean, next build clean, funding-explorer renders 196 rounds/$4,245M/176 companies with all new rows + sources, investor-map shows 90 investors incl. Atom XVII "new", zero console errors. (Browser screenshot tool timed out; verification was via rendered page text.)

@@ -13,7 +13,7 @@ Next.js 14 (App Router) + a typed static data layer + a daily Claude-powered ref
 
 | Applet | Route | The question it answers |
 |---|---|---|
-| **Funding Rounds Explorer** | `/applets/funding-explorer` | Where is capital concentrated vs. thin? Filter 160+ real rounds by sector × GTM × tier × stage × city × investor, with a live-computed concentration read and round-cadence base rates. |
+| **Funding Rounds Explorer** | `/applets/funding-explorer` | Where is capital concentrated vs. thin? Filter 195+ real rounds by sector × GTM × tier × stage × city × investor, with a live-computed concentration read and round-cadence base rates. |
 | **Momentum Dashboard** | `/applets/momentum-dashboard` | Which emerging brands are growing — and is it bought or earned? 175 brands, re-weightable composite score with signal decomposition. |
 | **Category White-space Map** | `/applets/whitespace-map` | Where are the under-funded gaps? Sector × income-tier heatmap with report-sourced market backdrop. |
 | **Investor Activity Map** | `/applets/investor-map` | Who co-invests with whom? Anchor a fund → Natural Ally / Untapped Fit / Parallel Player bands + affinity matrix. |
@@ -49,7 +49,7 @@ components/
 lib/
   data/
     taxonomy.ts                The MECE spine: 11 sectors × 6 GTM tags × 5 income tiers
-    funding-rounds.ts          160+ verified rounds (merges auto-rounds.json)
+    funding-rounds.ts          195+ verified rounds (merges auto-rounds.json)
     brands.ts                  175 brands across all 11 sectors (funded + bootstrapped)
     investors.ts               89 India consumer investors (VC, PE, strategic, sovereign, angel; merges auto-investors.json)
     whitespace.ts              Sector × tier gap grid (derived + editorial)
