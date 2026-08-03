@@ -309,6 +309,50 @@ export const INDUSTRY_REPORTS: IndustryReport[] = [
       { stat: "Index", detail: "Aggregates reports from MBB, Big 4, boutiques, investment banks and VCs in one place." },
     ],
   },
+  {
+    id: "bain-how-india-shops-online-2026",
+    title: "How India Shops Online 2026",
+    author: "Bain & Company (with Flipkart)",
+    authorType: "consulting",
+    year: 2026,
+    url: "https://www.bain.com/insights/how-india-shops-online-2026/",
+    scope: "Bain & Flipkart's annual read on India's e-retail market: GMV trajectory, shopper base, quick commerce, Tier-2+ demand and AI in online shopping.",
+    keyStats: [
+      { stat: "$65-66B e-retail GMV", detail: "India's e-retail GMV reached $65-66B in 2025, growing 19-21%, and is projected to hit $170-180B by 2030." },
+      { stat: "$10-11B q-comm GMV", detail: "Quick commerce reached $10-11B GMV in 2025, doubling annually since 2023; projected to $65-70B by 2030." },
+      { stat: "290-300M shoppers", detail: "E-retail shopper base reached 290-300M in 2025, roughly doubling over five years; Tier-2+ cities ~50% of incremental orders." },
+      { stat: "160M+ ChatGPT users", detail: "India became the world's second-largest ChatGPT market at 160M+ MAU (4.5x growth in 2025), signalling AI's entry into online shopping." },
+    ],
+  },
+  {
+    id: "redseer-value-grocery-bharat-unlock-2026",
+    title: "Value Grocery Commerce: The Bharat Unlock",
+    author: "Redseer Strategy Consultants",
+    authorType: "research",
+    year: 2026,
+    url: "https://redseer.com/reports/value-grocery-commerce-the-bharat-unlock/",
+    scope: "Redseer's Jun 2026 report on value-focused online grocery for Tier-2/3 and Bharat consumers, positioned as distinct from metro-centric quick commerce.",
+    keyStats: [
+      { stat: "~40% of households", detail: "Bharat households projected to make up nearly 40% of India's total households by FY30." },
+      { stat: "$1T+ Bharat consumption", detail: "Bharat consumption projected to exceed $1 trillion annually by FY30." },
+      { stat: "$658B → ~$992B grocery", detail: "India's grocery market projected to expand from ~$658B to nearly $992B by FY30, still overwhelmingly served by kiranas." },
+    ],
+  },
+  {
+    id: "inc42-d2c-3-0-2026",
+    title: "D2C 3.0: The Next Big Wave In Indian Ecommerce, Report 2026",
+    author: "Inc42",
+    authorType: "aggregator",
+    year: 2026,
+    url: "https://inc42.com/reports/d2c-3-0-the-next-big-wave-in-indian-ecommerce-report-2026/",
+    scope: "Inc42's Mar 2026 report mapping India's D2C ecosystem into a 'D2C 3.0' era: ecommerce/D2C GMV growth, power-shopper concentration and funding.",
+    keyStats: [
+      { stat: "$65B → $310B D2C GMV", detail: "D2C GMV projected to scale from $65B to $310B (~37% CAGR), commanding more than two-thirds of ecommerce GMV by 2031." },
+      { stat: "$165B → $450B ecommerce", detail: "India's overall ecommerce market projected to grow from $165B to $450B by 2031 at a 22% CAGR." },
+      { stat: "2% = 60% of GMV", detail: "Just 2% of 'power shoppers' out of India's 958M internet users account for 60% of ecommerce GMV." },
+      { stat: "$10B+ D2C funding", detail: "Between 2015 and Q1 2026, homegrown D2C startups raised more than $10B across 1,400+ funding rounds." },
+    ],
+  },
 ];
 
 export const REPORT_TAKEAWAY =

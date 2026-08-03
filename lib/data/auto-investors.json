@@ -8,5 +8,15 @@
     "sources": ["https://entrackr.com/snippets/atom-xvii-seeks-rs-75-cr-for-consumer-startup-fund-12041805"],
     "autoDetected": true,
     "addedISO": "2026-07-16T00:00:00.000Z"
+  },
+  {
+    "name": "ConsumerX Ventures (D2C Insider)",
+    "type": "seed-fund",
+    "corpusUsdMn": 17.4,
+    "stageFocus": "Pre-seed to seed",
+    "thesis": "D2C Insider's ₹150 Cr operator-led Cat-II AIF backing India's next generation of digitally native consumer brands (Gen Z, Bharat, D2C); launched Jun 2026, led by Abhishek Shah and Chhavi Bhardwaj Kargaonkar.",
+    "sources": ["https://pulse.d2cinsider.com/d2c-insider-launches-consumerx-ventures-to-back-indias-next-generation-of-consumer-brands/", "https://www.outlookbusiness.com/corporate/consumerx-ventures-bets-150-cr-on-indias-next-consumer-start-ups"],
+    "autoDetected": true,
+    "addedISO": "2026-08-03T00:00:00.000Z"
   }
 ]

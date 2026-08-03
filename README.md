@@ -13,14 +13,14 @@ Next.js 14 (App Router) + a typed static data layer + a daily Claude-powered ref
 
 | Applet | Route | The question it answers |
 |---|---|---|
-| **Funding Rounds Explorer** | `/applets/funding-explorer` | Where is capital concentrated vs. thin? Filter 195+ real rounds by sector × GTM × tier × stage × city × investor, with a live-computed concentration read and round-cadence base rates. |
-| **Momentum Dashboard** | `/applets/momentum-dashboard` | Which emerging brands are growing — and is it bought or earned? 175 brands, re-weightable composite score with signal decomposition. |
+| **Funding Rounds Explorer** | `/applets/funding-explorer` | Where is capital concentrated vs. thin? Filter 200+ real rounds by sector × GTM × tier × stage × city × investor, with a live-computed concentration read and round-cadence base rates. |
+| **Momentum Dashboard** | `/applets/momentum-dashboard` | Which emerging brands are growing — and is it bought or earned? 182 brands, re-weightable composite score with signal decomposition. |
 | **Category White-space Map** | `/applets/whitespace-map` | Where are the under-funded gaps? Sector × income-tier heatmap with report-sourced market backdrop. |
 | **Investor Activity Map** | `/applets/investor-map` | Who co-invests with whom? Anchor a fund → Natural Ally / Untapped Fit / Parallel Player bands + affinity matrix. |
 | **Graduation Funnel** | `/applets/graduation-funnel` | What % of seed brands reach Series A/B? Cohort base rates by sector. |
 | **Unit Economics Sandbox** | `/applets/unit-economics` | Do the unit economics work? Live LTV/CAC + payback with editable inputs and category benchmarks. |
 | **Exits & Acquisitions Tracker** | `/applets/exits-tracker` | How do consumer VCs actually exit? FMCG M&A leaderboard (HUL, ITC, Marico, Emami). |
-| **Research & Reports** | `/applets/research` | What do the canonical reports say? 20 reports with parsed figures, plus a chat that answers from the corpus (bring your own Claude key). |
+| **Research & Reports** | `/applets/research` | What do the canonical reports say? 23 reports with parsed figures, plus a chat that answers from the corpus (bring your own Claude key). |
 
 Each applet leads with a measured **"The read"** takeaway (the investor "so what") before the data.
 
@@ -49,8 +49,8 @@ components/
 lib/
   data/
     taxonomy.ts                The MECE spine: 11 sectors × 6 GTM tags × 5 income tiers
-    funding-rounds.ts          195+ verified rounds (merges auto-rounds.json)
-    brands.ts                  175 brands across all 11 sectors (funded + bootstrapped)
+    funding-rounds.ts          200+ verified rounds (merges auto-rounds.json)
+    brands.ts                  182 brands across all 11 sectors (funded + bootstrapped)
     investors.ts               89 India consumer investors (VC, PE, strategic, sovereign, angel; merges auto-investors.json)
     whitespace.ts              Sector × tier gap grid (derived + editorial)
     cohorts.ts                 Graduation-funnel base rates

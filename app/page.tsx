@@ -4,13 +4,13 @@ const APPLETS = [
   {
     slug: "funding-explorer",
     title: "Funding Rounds Explorer",
-    description: "195+ real rounds (2019-2026) - filter by sector, GTM model, income tier, stage, city, investor. Every row links to source.",
+    description: "200+ real rounds (2019-2026) - filter by sector, GTM model, income tier, stage, city, investor. Every row links to source.",
     icon: "💰",
   },
   {
     slug: "momentum-dashboard",
     title: "Momentum Dashboard",
-    description: "175 brands across all 11 consumer sectors - funded and bootstrapped. Re-weightable score with computed signals (funding recency, investor quality) and full derivation trace.",
+    description: "182 brands across all 11 consumer sectors - funded and bootstrapped. Re-weightable score with computed signals (funding recency, investor quality) and full derivation trace.",
     icon: "🚀",
   },
   {
