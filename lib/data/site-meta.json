@@ -1,6 +1,6 @@
 {
   "lastUpdatedISO": "2026-08-03T12:00:00Z",
-  "lastCheckedISO": "2026-08-31T09:56:17.156Z",
+  "lastCheckedISO": "2026-09-01T08:46:51.193Z",
   "refreshScheduleIST": "09:00",
   "note": "lastCheckedISO is bumped every daily run; lastUpdatedISO only changes when new data is actually added."
 }
